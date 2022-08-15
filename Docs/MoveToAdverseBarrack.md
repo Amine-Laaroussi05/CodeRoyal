@@ -8,11 +8,11 @@ Quand un bâtiment est détruit par la reine, on remet le `owner` en 0.
 
 > Dans le coding game, c'est remis selon les explications données en bas, à savoir, à chacun des tours, le owner est mis à jour.
 
-Si la liste est vide, on utilisera la méthode `Move()`.
+S'il n'y pas de bâtiment adverse, on utilisera la méthode `Move()`.
 
-Une autre liste enregistrera tous les identifiants des bâtiments suivis de leur coordonnée.
+Cette liste enregistrera en plus tous les identifiants des bâtiments suivis de leur coordonnée.
 
-S'il y a plusieurs valeurs, alors la reine se déplace vers la bâtiment le plus proche.
+S'il y a plusieurs valeurs (owner = 1), alors la reine se déplace vers la bâtiment le plus proche.
 
 ### Méthode intermédiaire I :
 
