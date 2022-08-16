@@ -205,19 +205,274 @@ owner = 0
 
 - Quand utiliser `moveToAdverseBarrack()` au lieu de `build()` ou de `move()`?
 
+Méthode `moveOrBuild()`
+
 ```java
-reine.ownersite() = -1
+reine.coord_x = 480
+reine.coord_y = 910
 
--> 
+siteId = 28
+coord_x = 500
+coord_y = 900
+owner = 1
+
+moveOrBuild()
+
+-> build()
+```
+
+```java
+reine.coord_x = 490
+reine.coord_y = 880
+
+siteId = 9
+coord_x = 600;
+coord_y = 300;
+owner = 0
+
+moveOrBuild()
+
+-> kindOfMove()
+```
+
+- Le bâtiment adverse détruit a-t-il été ajouté dans la liste de nos bâtiments alliés ? A-t-il été `build()` ?
+
+Attribut `sitesId` :
+
+```java
+reine.coord_x = 480
+reine.coord_y = 910
+
+siteId = 28
+coord_x = 500
+coord_y = 900
+owner = 1
+
+moveOrBuild()
+
+-> owner = 0
+
+siteId = 28
+coord_x = 500
+coord_y = 900
+owner = 0
+```
+
+```java
+reine.coord_x = 490
+reine.coord_y = 880
+
+siteId = 9
+coord_x = 600;
+coord_y = 300;
+owner = 1
+
+siteId = 56
+coord_x = 500;
+coord_y = 900;
+owner = 1
+
+moveOrBuild()
+
+-> owner = 0
+
+siteId = 56
+coord_x = 500;
+coord_y = 900;
+owner = 0
+```
+
+```java
+reine.coord_x = 490
+reine.coord_y = 880
+
+siteId = 9
+coord_x = 600;
+coord_y = 300;
+owner = 0
+
+siteId = 56
+coord_x = 500;
+coord_y = 900;
+owner = 1
+
+moveOrBuild()
+
+-> owner = 0
+
+siteId = 56
+coord_x = 500;
+coord_y = 900;
+owner = 0
+```
+
+```java
+reine.coord_x = 1700
+reine.coord_y = 800
+
+siteId = 92;
+coord_x = 500;
+coord_y = 300;
+owner = 0
+
+siteId = 77;
+coord_x = 1400;
+coord_y = 500;
+owner = 0
+
+siteId = 81;
+coord_x = 1500;
+coord_y = 100;
+owner = 1
+
+siteId = 47;
+coord_x = 1000;
+coord_y = 100;
+owner = 0
+
+siteId = 46;
+coord_x = 100;
+coord_y = 200;
+owner = 0
+
+siteId = 43;
+coord_x = 1200;
+coord_y = 700;
+owner = 1
+
+siteId = 61;
+coord_x = 1700;
+coord_y = 800;
+owner = 1
+
+siteId = 40;
+coord_x = 300;
+coord_y = 600;
+owner = 0
+
+siteId = 50;
+coord_x = 900;
+coord_y = 300;
+owner = 0
+
+siteId = 66;
+coord_x = 600;
+coord_y = 500;
+owner = 0
+
+moveOrBuild()
+
+-> owner = 0
+
+siteId = 61;
+coord_x = 1700;
+coord_y = 800;
+owner = 0
+```
+
+- Après qu'il ait été `build()`, la reine se déplace-t-elle après ?
+
+```java
+reine.coord_x = 360
+reine.coord_y = 540
+
+siteId = 40;
+coord_x = 300;
+coord_y = 600;
+owner = 1
+
+moveOrBuild()
+
+moveOrBuild()
+
+-> kindOfMove()
+```
+
+```java
+reine.coord_x = 690
+reine.coord_y = 320
+
+siteId = 32;
+coord_x = 700;
+coord_y = 300;
+owner = 1
+
+siteId = 27;
+coord_x = 600;
+coord_y = 100;
+owner = 1
+
+moveOrBuild()
+
+moveOrBuild()
+
+-> kindOfMove()
+```
+
+```java
+reine.coord_x = 1700
+reine.coord_y = 800
+
+siteId = 92;
+coord_x = 500;
+coord_y = 300;
+owner = 0
+
+siteId = 77;
+coord_x = 1400;
+coord_y = 500;
+owner = 0
+
+siteId = 81;
+coord_x = 1500;
+coord_y = 100;
+owner = 1
+
+siteId = 47;
+coord_x = 1000;
+coord_y = 100;
+owner = 0
+
+siteId = 46;
+coord_x = 100;
+coord_y = 200;
+owner = 0
+
+siteId = 43;
+coord_x = 1200;
+coord_y = 700;
+owner = 1
+
+siteId = 61;
+coord_x = 1700;
+coord_y = 800;
+owner = 1
+
+siteId = 40;
+coord_x = 300;
+coord_y = 600;
+owner = 0
+
+siteId = 50;
+coord_x = 900;
+coord_y = 300;
+owner = 0
+
+siteId = 66;
+coord_x = 600;
+coord_y = 500;
+owner = 0
+
+moveOrBuild()
+
+moveOrBuild()
+
+-> kindOfMove()
 ```
 
 ```
 
 ```
-
-- Le bâtiment adverse détruit a-t-il été ajouté dans la liste de nos bâtiments alliés ?
-
-- A-t-il été `build()` ?
 
 ### Avec la méthode `train()`
 
