@@ -1,5 +1,6 @@
-package CodeRoyal;
+package UnitaryTests;
 
+import CodeRoyal.Reine;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

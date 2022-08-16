@@ -1,5 +1,6 @@
-package CodeRoyal;
+package UnitaryTests;
 
+import CodeRoyal.Reine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

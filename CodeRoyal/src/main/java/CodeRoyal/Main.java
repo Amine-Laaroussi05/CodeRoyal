@@ -1,6 +1,18 @@
 package CodeRoyal;
 
+import java.util.List;
+
 public class Main {
+
+
+    /**
+     * Permet de générer une liste aléatoire de bâtiments.
+     * @param numberOfOnes : nombre de bâtiments avec un owner = 1.
+     * @return Une liste de bâtiments.
+     */
+    public static List<Batiment> generateBatiments(int numberOfOnes){
+        return null;
+    }
 
 
 

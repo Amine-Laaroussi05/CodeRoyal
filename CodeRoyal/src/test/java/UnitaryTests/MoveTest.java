@@ -1,5 +1,6 @@
-package CodeRoyal;
+package UnitaryTests;
 
+import CodeRoyal.Reine;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
