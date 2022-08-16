@@ -102,6 +102,20 @@ numberOfOnes = 0;
 -> la liste doit contenir 0 owner 1.
 ```
 
+```java
+random(siteID)
+random(coord_x)
+random(coord_y)
+random(owner) // valeur compris entre -1,0 et 1
+numberOfOnes = -1;
+
+-> Exception;
+```
+
+```
+
+```
+
 ### Tests de la méthode principale :
 
 - One value
