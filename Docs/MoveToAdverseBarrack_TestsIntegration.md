@@ -470,20 +470,232 @@ moveOrBuild()
 -> kindOfMove()
 ```
 
-```
-
-```
-
 ### Avec la méthode `train()`
 
 - Quelle prioriter donner aux bâtiments adverses qui sont devenus nôtres par rapport aux autres bâtiments qu'on a `build()`?
+  
+  - La méthode `train()` suivra la même configuration que celle appliquée, à savoir `5 KNIGHT` et `4 ARCHER`. 
+  - La méthode `train()` n'a pas de relation directe avec la méthode `moveToAdverseBarrack()` même si elle en dépend. Cependant, on peut toujours vérifier s'il y a un update après que la méthode `moveToAdverseBarrack()` ait été utilisée.
+1. Avant l'arrivé au site
 
-### Avec la méthode `barracks()`
+2. Juste après l'arrivé au site
 
-- La configuration pour l'entraînements des unités est-elle toujours respectée ?
+3. Départ du site
+
+4. One value and after `build()`
+
+5. Two values (2-none, 1-1, none-2)
+
+```java
+reine.coord_x = 1700
+reine.coord_y = 800
+gold = 100
+
+siteId = 92;
+coord_x = 500;
+coord_y = 300;
+owner = 1
+armyTrained = 0 // valeur de 0 à 10 
+
+siteId = 77;
+coord_x = 1400;
+coord_y = 500;
+owner = 0
+armyTrained = 0 // valeur de 0 à 10 
+
+siteId = 81;
+coord_x = 1500;
+coord_y = 100;
+owner = 1
+armyTrained = 0 // valeur de 0 à 10 
+
+moveOrBuild()
+
+train()
+
+-> "TRAIN 77"
+```
+
+```java
+reine.coord_x = 1190
+reine.coord_y = 700
+gold = 100
+
+siteId = 47;
+coord_x = 1000;
+coord_y = 100;
+owner = 0
+armyTrained = 5 // valeur de 0 à 10 
+
+siteId = 46;
+coord_x = 100;
+coord_y = 200;
+owner = 0
+armyTrained = 0 // valeur de 0 à 10 
+
+siteId = 43;
+coord_x = 1200;
+coord_y = 700;
+owner = 1
+armyTrained = 0 // valeur de 0 à 10 
+
+moveOrBuild()
+
+train()
+
+-> "TRAIN 46"
+```
+
+```java
+reine.coord_x = 1700
+reine.coord_y = 800
+gold = 100
+
+siteId = 61;
+coord_x = 1700;
+coord_y = 800;
+owner = 1
+armyTrained = 0 // valeur de 0 à 10
+
+siteId = 40;
+coord_x = 300;
+coord_y = 600;
+owner = 0
+armyTrained = 0 // valeur de 0 à 10
+
+siteId = 50;
+coord_x = 900;
+coord_y = 300;
+owner = 0
+armyTrained = 0 // valeur de 0 à 10
+
+moveOrBuild()
+
+moveOrBuild()
+
+train()
+
+-> "TRAIN 61"
+```
 
 ### L'ensemble de ces méthodes avec la classe `Main`
 
 - Obtient-t-on le résultat escompté dans un tour particulier et pour des valeurs précises ?
 
-- Pour un certain nombre de tours avec des valeurs initiales au départ 
+```java
+reine.coord_x = 700
+reine.coord_y = 900
+gold = 40
+compteurKnight = 1
+
+
+siteId = 2
+coord_x = 600
+coord_y = 100
+owner = -1
+armyTrained = 0
+builded = false
+
+siteId = 89
+coord_x = 500
+coord_y = 700
+owner = 0
+armyTrained = 0
+builded = true
+
+siteId = 13
+coord_x = 1400
+coord_y = 300
+owner = -1
+armyTrained = 0
+builded = false
+
+moveOrBuild()
+
+train()
+
+-> move()
+gold = 50
+compteurKnight = 1
+
+siteId = 2
+coord_x = 600
+coord_y = 100
+owner = -1
+armyTrained = 0
+builded = false
+
+siteId = 89
+coord_x = 500
+coord_y = 700
+owner = 0
+armyTrained = 0
+builded = true
+
+siteId = 13
+coord_x = 1400
+coord_y = 300
+owner = -1
+armyTrained = 0
+builded = false
+```
+
+```java
+reine.coord_x = 1100
+reine.coord_y = 500
+gold = 70
+compteurKnight = 1
+
+
+siteId = 2
+coord_x = 300
+coord_y = 400
+owner = 1
+armyTrained = 0
+builded = false
+
+siteId = 89
+coord_x = 500
+coord_y = 700
+owner = 0
+armyTrained = 0
+builded = true
+
+siteId = 13
+coord_x = 1400
+coord_y = 300
+owner = -1
+armyTrained = 0
+builded = false
+
+moveOrBuild()
+
+train()
+
+-> moveToAdverseKnight()
+gold = 70
+compteurKnight = 1
+
+siteId = 2
+coord_x = 300
+coord_y = 400
+owner = 1
+armyTrained = 0
+builded = false
+
+siteId = 89
+coord_x = 500
+coord_y = 700
+owner = 0
+armyTrained = 0
+builded = true
+
+siteId = 13
+coord_x = 1400
+coord_y = 300
+owner = -1
+armyTrained = 0
+builded = false
+```
+
+- Même pour chose pour un certain nombre de tours avec des valeurs initiales au départ 
