@@ -86,4 +86,18 @@ public class Batiment {
     public void setBuilded(boolean builded) {
         this.builded = builded;
     }
+
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Batiment{");
+        sb.append("id=").append(id);
+        sb.append(", coord_x=").append(coord_x);
+        sb.append(", coord_y=").append(coord_y);
+        sb.append(", owner=").append(owner);
+        sb.append(", armyTrained=").append(armyTrained);
+        sb.append(", builded=").append(builded);
+        sb.append('}');
+        return sb.toString();
+    }
 }
