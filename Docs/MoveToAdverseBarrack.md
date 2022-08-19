@@ -45,7 +45,8 @@ public void generateSiteId(int numberOfOnes){
 - Méthode intermédiaire II :
 
 ```java
-public List<Integer, Integer> calculateMinimumDistance(){
+public int calculateMinimumDistance(int coord_x, int coord_y,
+List<Batiment> batimentList){
     // le point minimal parmi la liste de points saisie
 }
 ```
@@ -339,7 +340,7 @@ reine.coord_y = 700;
 coord_x = 500;
 coord_y = 700;
 
--> [200,200];
+-> [500,700];
 ```
 
 - One value different and lower :

@@ -8,7 +8,6 @@ import org.mockito.*;
 
 import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemOut;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.when;
 
 public class BuildTest {
 

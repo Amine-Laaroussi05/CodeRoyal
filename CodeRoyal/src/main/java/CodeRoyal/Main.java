@@ -62,6 +62,31 @@ public class Main {
 
 
 
+
+
+
+
+    /**
+     * Calcule le point le plus proche en prenant compte de la position actuelle de la reine et de la liste de bâtiments avec un owner = 1.
+     * @param coord_x : coordonnée x de la reine
+     * @param coord_y : coordonnée y de la reine
+     * @param batimentList : La liste de bâtiments
+     * @return l'indice du bâtiment ennemi le plus proche de la reine.
+     */
+    public static int calculateMinimalDistance(Reine reine,List<Batiment> batimentList){
+        return 0;
+    }
+
+
+
+
+
+
+
+
+
+
+
     
 
     public static void main(String[] args) {
