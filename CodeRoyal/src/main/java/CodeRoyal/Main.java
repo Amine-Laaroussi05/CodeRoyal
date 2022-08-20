@@ -68,13 +68,24 @@ public class Main {
 
     /**
      * Calcule le point le plus proche en prenant compte de la position actuelle de la reine et de la liste de bâtiments avec un owner = 1.
-     * @param coord_x : coordonnée x de la reine
-     * @param coord_y : coordonnée y de la reine
+     * @param reine : Reine
      * @param batimentList : La liste de bâtiments
      * @return l'indice du bâtiment ennemi le plus proche de la reine.
      */
     public static int calculateMinimalDistance(Reine reine,List<Batiment> batimentList){
-        return 0;
+        double distanceMin = Math.sqrt(Math.pow(reine.getCoord_x() - batimentList.get(0).getCoord_x(),2) + Math.pow(reine.getCoord_y() - batimentList.get(0).getCoord_y(),2));
+        int indexBatiment = 0;
+        int index = 0;
+        for(Batiment batiment: batimentList){
+            double distance = Math.sqrt(Math.pow(reine.getCoord_x()-batiment.getCoord_x(),2) + Math.pow(reine.getCoord_y() - batiment.getCoord_y(),2));
+            if(distance < distanceMin){
+                distanceMin = distance;
+                indexBatiment = index;
+            }
+            index++;
+
+        }
+        return indexBatiment;
     }
 
 

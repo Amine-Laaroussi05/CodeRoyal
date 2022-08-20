@@ -5,6 +5,7 @@ import CodeRoyal.Batiment;
 import CodeRoyal.Main;
 import CodeRoyal.Reine;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class calculateMinimalDistanceTest {
 
@@ -50,9 +52,7 @@ class calculateMinimalDistanceTest {
         while((ligne = reineBuffer.readLine()) != null){
             String[] data = ligne.split(",");
             Reine reine = new Reine();
-            System.out.println("Reine coord_x = " + data[0]);
             reine.setCoord_x(Integer.parseInt(data[0]));
-            System.out.println("Reine coord_y = " + data[1]);
             reine.setCoord_y(Integer.parseInt(data[1]));
             reineList.add(reine);
         }
@@ -71,39 +71,45 @@ class calculateMinimalDistanceTest {
         int lastInteger = 0;
         while((ligne = batimentsBuffer.readLine()) != null){
             String[] data = ligne.split(",");
-            System.out.println("Batiment coord_x = " + data[1]);
-            System.out.println("Batiment coord_y = " + data[2]);
             Batiment batiment = new Batiment(id++,Integer.parseInt(data[1]),Integer.parseInt(data[2]),1,false);
-            System.out.println("Batiment numero test = " + data[0]);
             if(Integer.parseInt(data[0]) == lastInteger){
                 batimentList.add(batiment);
             } else if(lastInteger == 0){
                 batimentList.add(batiment);
                 lastInteger++;
             } else{
-                batimentsHashMap.put(lastInteger,batimentList);
+                List<Batiment> batimentListCopy = new ArrayList<>(batimentList);
+                batimentsHashMap.put(lastInteger,batimentListCopy);
                 batimentList.clear();
                 batimentList.add(batiment);
                 lastInteger++;
             }
         }
 
+        batimentsHashMap.put(lastInteger,batimentList);
+
         reineBuffer.close();
         batimentsBuffer.close();
     }
 
 
+
+
+
+
+
+
     /**
-     * Test paramétré où on essaye de voir si le bâtiment le plus proche de la reine est celui qu'on attendait.
+     * Test paramétré où on essaye de voir si le bâtiment le plus proche de la reine est celui qu'on cherchait.
      * @param expectedIndex : l'indice du bâtiment le plus proche parmi les bâtiments de la liste.
      */
-    @ParameterizedTest
+    @ParameterizedTest(name = "expectedIndex = {arguments}")
     @CsvFileSource(resources = "/calculateMinimalDistanceTest/expectedIndex.csv", numLinesToSkip = 1)
     public void test(int expectedIndex){
-
-        assertEquals(expectedIndex, Main.calculateMinimalDistance(reineList.get(numeroTest-1),batimentsHashMap.get(numeroTest)));
-        numeroTest++;
+        assertEquals(expectedIndex, Main.calculateMinimalDistance(reineList.get(numeroTest-1),batimentsHashMap.get(numeroTest++)));
     }
+
+
 
 
 
