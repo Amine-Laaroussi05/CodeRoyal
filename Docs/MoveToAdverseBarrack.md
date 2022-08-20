@@ -12,7 +12,7 @@ S'il n'y pas de bâtiment adverse, on utilisera la méthode `Move()`.
 
 Cette liste enregistrera en plus tous les identifiants des bâtiments suivis de leur coordonnée.
 
-S'il y a plusieurs valeurs (owner = 1), alors la reine se déplace vers la bâtiment le plus proche.
+S'il y a plusieurs valeurs (owner = 1), alors la reine se déplace vers le bâtiment le plus proche.
 
 ### Méthode intermédiaire I :
 
@@ -133,21 +133,20 @@ owner = 1
 - Zero Value
 
 ```java
+reine.coord_x = 300;
+reine.coord_y = 800;
+
 siteId = 5;
 coord_x = 400;
 coord_y = 300;
 owner = 0
 
--> move();
+-> coord_x = 300 & coord_y = 800
 ```
 
 - Two values
 
 ```java
-reine.coord_x = 300;
-reine.coord_y = 800;
-
-
 siteId = 4;
 coord_x = 1500;
 coord_y = 600;

@@ -85,6 +85,10 @@ public class Reine {
 
 
 
+    public void moveToAdverseBarrack(List<Batiment> batimentList){
+
+    }
+
 
 
 
