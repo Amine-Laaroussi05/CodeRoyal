@@ -86,7 +86,11 @@ public class Reine {
 
 
     public void moveToAdverseBarrack(List<Batiment> batimentList){
-
+        int indexBatiment = Main.calculateMinimalDistance(coord_x,coord_y,batimentList);
+        if(indexBatiment != -1){
+            coord_x = batimentList.get(indexBatiment).getCoord_x();
+            coord_y = batimentList.get(indexBatiment).getCoord_y();
+        }
     }
 
 

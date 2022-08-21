@@ -103,10 +103,10 @@ class calculateMinimalDistanceTest {
      * Test paramétré où on essaye de voir si le bâtiment le plus proche de la reine est celui qu'on cherchait.
      * @param expectedIndex : l'indice du bâtiment le plus proche parmi les bâtiments de la liste.
      */
-    @ParameterizedTest(name = "expectedIndex = {arguments}")
-    @CsvFileSource(resources = "/calculateMinimalDistanceTest/expectedIndex.csv", numLinesToSkip = 1)
+    @ParameterizedTest(name = "{arguments}")
+    @CsvFileSource(resources = "/calculateMinimalDistanceTest/expectedIndex.csv", useHeadersInDisplayName = true)
     public void test(int expectedIndex){
-        assertEquals(expectedIndex, Main.calculateMinimalDistance(reineList.get(numeroTest-1),batimentsHashMap.get(numeroTest++)));
+        assertEquals(expectedIndex, Main.calculateMinimalDistance(reineList.get(numeroTest-1).getCoord_x(), reineList.get(numeroTest-1).getCoord_y(),batimentsHashMap.get(numeroTest++)));
     }
 
 

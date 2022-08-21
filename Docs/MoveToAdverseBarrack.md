@@ -191,7 +191,7 @@ coord_x = 600;
 coord_y = 900;
 owner = 1
 
--> coord_x = 1200 & coord_y = 400;
+-> coord_x = 600 & coord_y = 900;
 ```
 
 - One value from multiple values
