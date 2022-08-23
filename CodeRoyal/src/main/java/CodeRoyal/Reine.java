@@ -74,10 +74,6 @@ public class Reine {
             }
             this.choix_direction = true;
         }
-
-
-//            System.out.println("MOVE " + this.coord_x + " " + this.coord_y);
-
     }
 
 
@@ -85,6 +81,13 @@ public class Reine {
 
 
 
+
+
+
+    /**
+     * Pour déplacer la reine vers le bâtiment adverse le plus proche.
+     * @param batimentList : La liste des bâtiments présents sur la carte.
+     */
     public void moveToAdverseBarrack(List<Batiment> batimentList){
         int indexBatiment = Main.calculateMinimalDistance(coord_x,coord_y,batimentList);
         if(indexBatiment != -1){
@@ -92,6 +95,33 @@ public class Reine {
             coord_y = batimentList.get(indexBatiment).getCoord_y();
         }
     }
+
+
+
+
+
+
+
+    /**
+     * Permet à la reine de déterminer quel type de mouvement utilisé entre moveToAdverseBarrack() et move().
+     * @param batimentList : La liste des bâtiments présents sur la carte.
+     */
+    public void kinfOfMove(List<Batiment> batimentList){
+        int indexBatimentPlusProche = Main.calculateMinimalDistance(coord_x,coord_y,batimentList);
+        if( indexBatimentPlusProche == -1){
+            Move();
+        } else{
+            double distanceReineBatimentPlusProche = Math.sqrt(Math.pow(batimentList.get(indexBatimentPlusProche).getCoord_x() - coord_x, 2)
+                    + Math.pow(batimentList.get(indexBatimentPlusProche).getCoord_y() - coord_y, 2));
+            if(distanceReineBatimentPlusProche < 30) Move();
+            else moveToAdverseBarrack(batimentList);
+        }
+    }
+
+
+
+
+
 
 
 
