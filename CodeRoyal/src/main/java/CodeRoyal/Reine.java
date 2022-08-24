@@ -102,6 +102,24 @@ public class Reine {
 
 
 
+
+    /**
+     * Détermine si la méthode utilisée est build() ou kindOfMove().
+     * @param batimentList : la liste des bâtiments présents sur la carte.
+     */
+    public void moveOrBuild(List<Batiment> batimentList){
+
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * Permet à la reine de déterminer quel type de mouvement utilisé entre moveToAdverseBarrack() et move().
      * @param batimentList : La liste des bâtiments présents sur la carte.

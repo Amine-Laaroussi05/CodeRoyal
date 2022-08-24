@@ -20,7 +20,7 @@ public class Main {
         }
 
         Random random = new Random();
-        int numBatiment = random.ints(1,numberOfOnes,100).iterator().next();
+        int numBatiment = random.ints(1,numberOfOnes,20).iterator().next();
         List<Batiment> batimentList = new ArrayList<>();
         int owner = -1;
 

@@ -6,7 +6,7 @@ public class Batiment {
     private int id;
     private int coord_x;
     private int coord_y;
-    private int owner = -1;
+    private int owner = -1; // owner = -1 : bâtiment non construit // owner = 0 : bâtiment allié // owner = 1 : bâtiment ennemi
     private int armyTrained = 0;
     private boolean builded = false;
 

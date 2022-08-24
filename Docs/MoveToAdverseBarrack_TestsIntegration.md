@@ -207,9 +207,45 @@ owner = 0
 
 Méthode `moveOrBuild()`
 
+1. Aucun bâtiment n'est proche de la reine, avec un bâtiment ennemi existant.
+
+2. Aucun bâtiment n'est proche de la reine, et aucun bâtiment ennemi de construit.
+
+3. Reine en contact d'un bâtiment non construit, et aucun bâtiment ennemi de construit.
+
+4. Reine en contact d'un bâtiment non construit, et au moins un bâtiment ennemi de construit.
+
+5. Reine en contact d'un bâtiment allié, et aucun bâtiment ennemi de construit.
+
+6. Reine en contact d'un bâtiment allié, et au moins un bâtiment ennemi de construit.
+
+7. Reine en contact d'un bâtiment ennemi, et c'est le seul bâtiment ennemi construit.
+
+8. Reine en contact d'un bâtiment ennemi, et d'autres bâtiments ennemis existants.
+
 ```java
-reine.coord_x = 480
-reine.coord_y = 910
+reine.coord_x = 100
+reine.coord_y = 200
+
+siteId = 28
+coord_x = 500
+coord_y = 900
+owner = 1
+
+siteId = 28
+coord_x = 500
+coord_y = 900
+owner = 1
+
+siteId = 28
+coord_x = 500
+coord_y = 900
+owner = 1
+
+siteId = 28
+coord_x = 500
+coord_y = 900
+owner = 1
 
 siteId = 28
 coord_x = 500
