@@ -28,7 +28,9 @@ public class BuildTest {
         reine.touchedSiteInitializer();
         reine.setCoord_x(coord_x);
         reine.setCoord_y(coord_y);
-        String text = tapSystemOut(reine::build);
+        String text = tapSystemOut(()->{
+//            reine.build();
+        });
         assertEquals("BUILD " + expectedValue + " " + reine.barracks(), text);
     }
 

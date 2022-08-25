@@ -56,9 +56,28 @@ public class Main {
     }
 
 
-
-
-
+    /**
+     * Calcul la distance minimale qui sépare la reine et le bâtiment le plus proche de celle-ci.
+     * @param coord_x : coordonnée x de la reine
+     * @param coord_y : coordonnée y de la reine
+     * @param batimentList : la liste des bâtiments
+     * @return le bâtiment le plus proche
+     */
+    public static Batiment calculateminimalDistanceForAllBatiments(int coord_x, int coord_y,List<Batiment> batimentList){
+        if(batimentList.size() > 0){
+            double distanceMinimale = Math.sqrt(Math.pow(batimentList.get(0).getCoord_x() - coord_x,2) + Math.pow(batimentList.get(0).getCoord_y() - coord_y,2));
+            int indexBatiment = 0;
+            for(Batiment batiment: batimentList){
+                double distance = Math.sqrt(Math.pow(batiment.getCoord_x() - coord_x,2) + Math.pow(batiment.getCoord_y() - coord_y,2));
+                if(distance < distanceMinimale){
+                    distanceMinimale = distance;
+                    indexBatiment = batimentList.indexOf(batiment);
+                }
+            }
+            return batimentList.get(indexBatiment);
+        }
+        else return null;
+    }
 
 
 
@@ -118,7 +137,7 @@ public class Main {
             System.out.println("MOVE " + reine.getCoord_x() + " " + reine.getCoord_y());
             haveMoved = true;
             } else{
-                reine.build();
+//                reine.build();
                 System.out.println("");
                 haveMoved = false;
             }

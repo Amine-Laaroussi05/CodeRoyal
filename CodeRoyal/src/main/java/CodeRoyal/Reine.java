@@ -108,6 +108,27 @@ public class Reine {
      * @param batimentList : la liste des bâtiments présents sur la carte.
      */
     public void moveOrBuild(List<Batiment> batimentList){
+        for(Batiment batiment: batimentList) System.out.println(batiment.toString());
+        if(batimentList.size() > 0){
+            System.out.println("IF---------> Liste length: " + batimentList.size());
+            Batiment batiment = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
+            assert batiment != null;
+            System.out.println(batiment.toString());
+            double distance = Math.sqrt(Math.pow(coord_x - batiment.getCoord_x(),2) + Math.pow(coord_y - batiment.getCoord_y(),2));
+            System.out.println("distance du bâtiment: " + distance);
+            if(distance <= 30 & batiment.getOwner() != 0) {
+                System.out.println("builded!");
+                build(batimentList);
+            }
+            else{
+                System.out.println("movement!");
+                kinfOfMove(batimentList);
+            }
+        }
+        else{
+            kinfOfMove(batimentList);
+            System.out.println("movement with empty list");
+        }
 
     }
 
@@ -249,24 +270,32 @@ public class Reine {
      * Construction d'un bâtiment.
      * La méthode affiche le BUILD selon s'il n'y a pas de bâtiment allié de construit sur le site.
      */
-    public void build(){
+    public void build(List<Batiment> batimentList){
 
-        List<Integer> coordonees = new ArrayList<>();
-        coordonees.add(0);
-        coordonees.add(this.coord_x);
-        coordonees.add(this.coord_y);
+//        List<Integer> coordonees = new ArrayList<>();
+//        coordonees.add(0);
+//        coordonees.add(this.coord_x);
+//        coordonees.add(this.coord_y);
 
 
 
-        if(ownerSite() != 0){
-            this.setTouchedSiteArray(indexTouchedSite(), coordonees);
-            List<String> siteIdentifier = new ArrayList<>();
-            siteIdentifier.add("K");
-            siteIdentifier.add("-1");
-            sitesID.put(indexTouchedSite(),siteIdentifier);
-//            System.out.println("Hashmap: " + sitesID);
-            System.out.print("BUILD " + indexTouchedSite() + " " + barracks());
-        }
+//        if(ownerSite() != 0){
+//            this.setTouchedSiteArray(indexTouchedSite(), coordonees);
+//            List<String> siteIdentifier = new ArrayList<>();
+//            siteIdentifier.add("K");
+//            siteIdentifier.add("-1");
+//            sitesID.put(indexTouchedSite(),siteIdentifier);
+////            System.out.println("Hashmap: " + sitesID);
+//            System.out.print("BUILD " + indexTouchedSite() + " " + barracks());
+//        }
+
+        Batiment batimentPlusProche = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
+
+
+        assert batimentPlusProche != null;
+        System.out.print("BUILD " + batimentPlusProche.getId() + " " + barracks());
+
+
 
     }
 
