@@ -20,7 +20,7 @@ public class Main {
         }
 
         Random random = new Random();
-        int numBatiment = random.ints(1,numberOfOnes,20).iterator().next();
+        int numBatiment = random.ints(1,numberOfOnes+1,20).iterator().next();
         List<Batiment> batimentList = new ArrayList<>();
         int owner = -1;
 
@@ -63,7 +63,7 @@ public class Main {
      * @param batimentList : la liste des bâtiments
      * @return le bâtiment le plus proche
      */
-    public static Batiment calculateminimalDistanceForAllBatiments(int coord_x, int coord_y,List<Batiment> batimentList){
+    public static Batiment calculateminimalDistanceForAllBatiments(int coord_x, int coord_y,List<Batiment> batimentList) throws Exception {
         if(batimentList.size() > 0){
             double distanceMinimale = Math.sqrt(Math.pow(batimentList.get(0).getCoord_x() - coord_x,2) + Math.pow(batimentList.get(0).getCoord_y() - coord_y,2));
             int indexBatiment = 0;
@@ -76,7 +76,7 @@ public class Main {
             }
             return batimentList.get(indexBatiment);
         }
-        else return null;
+        else throw new Exception("La liste de bâtiments est vide");
     }
 
 

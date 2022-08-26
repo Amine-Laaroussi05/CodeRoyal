@@ -107,7 +107,7 @@ public class Reine {
      * Détermine si la méthode utilisée est build() ou kindOfMove().
      * @param batimentList : la liste des bâtiments présents sur la carte.
      */
-    public void moveOrBuild(List<Batiment> batimentList){
+    public void moveOrBuild(List<Batiment> batimentList) throws Exception {
         for(Batiment batiment: batimentList) System.out.println(batiment.toString());
         if(batimentList.size() > 0){
             System.out.println("IF---------> Liste length: " + batimentList.size());
@@ -270,7 +270,7 @@ public class Reine {
      * Construction d'un bâtiment.
      * La méthode affiche le BUILD selon s'il n'y a pas de bâtiment allié de construit sur le site.
      */
-    public void build(List<Batiment> batimentList){
+    public void build(List<Batiment> batimentList) throws Exception {
 
 //        List<Integer> coordonees = new ArrayList<>();
 //        coordonees.add(0);
