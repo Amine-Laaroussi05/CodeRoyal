@@ -292,8 +292,9 @@ public class Reine {
         Batiment batimentPlusProche = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
 
 
-        assert batimentPlusProche != null;
-        System.out.print("BUILD " + batimentPlusProche.getId() + " " + barracks());
+
+        System.out.print("BUILD " + batimentPlusProche.getId() + " " + barracks(batimentPlusProche));
+        batimentPlusProche.setOwner(0);
 
 
 
@@ -319,28 +320,33 @@ public class Reine {
      * Un attribut compteur_K permettra de tenir compte des entraînements type KNIGHT.
      *
      */
-    public String train(){
-        List<String> siteIdentifier = new ArrayList<>();
-        for(int key: sitesID.keySet()){
-            if(sitesID.get(key).get(1).equalsIgnoreCase("0")){
-                if(sitesID.get(key).get(0).equalsIgnoreCase("K") & gold >= 80){
-                    gold -= 80;
-                    siteIdentifier.add("K");
-                    siteIdentifier.add("1");
-                    sitesID.replace(key,siteIdentifier);
-                    return "TRAIN " + key;
-                } else if(sitesID.get(key).get(0).equalsIgnoreCase("A") & gold >= 100){
-                    gold -= 100;
-                    siteIdentifier.add("A");
-                    siteIdentifier.add("1");
-                    sitesID.replace(key,siteIdentifier);
-                    return "TRAIN " + key;
-                }
+    public String train(List<Batiment> batimentList) throws Exception {
+        // Une liste de bâtiments qui ne contient que les bâtiments avec un owner = 0 (bâtiments alliés)
+        List<Batiment> batimentListOwned = new ArrayList<>();
+        for(Batiment batiment: batimentList){
+            if(batiment.getOwner() == 0) batimentListOwned.add(batiment);
+        }
 
-            } else{
-                continue;
+        // On ordonne la liste selon la plus petite distance avec la reine (on cherche à entrainer l'armée dont le bâtiment est le plus proche de la reine)
+        batimentListOwned.sort((batiment1, batiment2) -> (int) Main.distanceEntreDeuxBatimentsAvecLaReine(batiment1,batiment2, coord_x,coord_y));
+
+        // On lance le cycle d'entrainements des armées
+        armyTrain(batimentListOwned);
+
+        // Si on n'a pas assez d'or, on ne fait aucun entrainement
+        if(gold < 80) return "TRAIN";
+
+        // On vérifie s'il y a un bâtiment disponible (armyTrained = 0) pour pouvoir lance l'entrainement d'une armée
+        for(Batiment batiment: batimentListOwned){
+            if(batiment.getArmyTrained() == 0 & batiment.getArmyType() == 'K'){
+                batiment.setArmyTrained(1);
+                return "TRAIN " + batiment.getId();
+            } else if(batiment.getArmyTrained() == 0 & batiment.getArmyType() == 'A' & gold >= 100){
+                batiment.setArmyTrained(1);
+                return "TRAIN " + batiment.getId();
             }
         }
+        // S'il n'y a pas de possibilité d'entrainement (par exemple une liste vide, ou des bâtiments avec que des archers et l'or en possession est < 100)
         return "TRAIN";
     }
 
@@ -351,13 +357,33 @@ public class Reine {
 
 
 
+
     /**
-     * La méthode BARRACKS permet de spécifier quel genre d'unité le bâtiment construit avec BUILD.
+     * Poursuit le cycle d'entrainement des armées qui sont en train d'être entrainées.
+     * @param batimentList : Une liste de bâtiments
+     */
+    public void armyTrain(List<Batiment> batimentList){
+        for(Batiment batiment: batimentList){
+            if(batiment.getArmyTrained() > 0 & batiment.getArmyTrained() < 10) batiment.setArmyTrained(batiment.getArmyTrained() +1);
+            else if(batiment.getArmyTrained() == 10) batiment.setArmyTrained(0);
+        }
+    }
+
+
+
+
+
+
+
+
+
+    /**
+     * La méthode BARRACKS permet de spécifier quel genre d'unité le bâtiment construit avec BUILD contiendra comme armée.
      * On utilisera ma configuration suivante : KNIGHT puis ARCHER. Une fois arrivé à 4 KNIGHT, la prochaine unité sera
      * KNIGHT avant de faire un ARCHER, pour arriver à la configuration 5 KNIGHT et 4 ARCHER.
      * @return a String BARRACKS-{typeArmy}
      */
-    public String barracks(){
+    public String barracks(Batiment batiment){
         // vérifie que le compteur est bien compris entre 0 et 8
         if(this.compteurKnight >= 0 & this.compteurKnight <= 8){
             // Si compteur modulo 2, retourne KNIGHT, sinon retourne ARCHER
@@ -368,9 +394,11 @@ public class Reine {
                 } else{
                     this.compteurKnight++;
                 }
+                batiment.setArmyType('K');
                 return "BARRACKS-KNIGHT";
             } else {
                 this.compteurKnight++;
+                batiment.setArmyType('A');
                 return "BARRACKS-ARCHER";
             }
         } else{

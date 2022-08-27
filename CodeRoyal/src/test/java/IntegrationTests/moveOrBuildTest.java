@@ -97,6 +97,9 @@ class moveOrBuildTest {
         System.out.println("Numéro du test: " + numeroTest);
         System.out.println("***********************");
         reine.moveOrBuild(batimentList);
+
+
+        // Vérifie si la bonne méthode a été appelée
         switch (numeroTest){
             case 1:
             case 2:

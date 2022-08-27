@@ -112,6 +112,23 @@ public class Main {
 
 
 
+    /**
+     * Détermine la plus petite distance des deux bâtiments avec la reine
+     * @param batiment1 : Bâtiment
+     * @param batiment2 : Bâtiment
+     * @return : la plus petite distance
+     */
+    public static double distanceEntreDeuxBatimentsAvecLaReine(Batiment batiment1, Batiment batiment2, int coord_x, int coord_y){
+        double distance1 = Math.sqrt(Math.pow(batiment1.getCoord_x() - coord_x,2) + Math.pow(batiment1.getCoord_y() - coord_y,2));
+        double distance2 = Math.sqrt(Math.pow(batiment2.getCoord_x() - coord_x,2) + Math.pow(batiment2.getCoord_y() - coord_y,2));
+        return Math.min(distance1, distance2);
+    }
+
+
+
+
+
+
 
 
 
@@ -143,7 +160,7 @@ public class Main {
             }
             reine.setGold(reine.getGold()+ 10);
             System.out.println("gold: " + reine.getGold());
-            System.out.println(reine.train());
+//            System.out.println(reine.train());
             System.out.println("==================");
         }
 

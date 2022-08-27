@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.mockito.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -42,28 +43,30 @@ public class BuildTest {
 
 
 
-    @RepeatedTest(10000)
-    public void test() throws Exception {
-        Random random = new Random();
-        reine.setCoord_x(random.ints(1,100,1900).iterator().nextInt());
-        reine.setCoord_y(random.ints(1,100,900).iterator().nextInt());
-        Mockito.when(reine.barracks()).thenReturn("BARRACKS-KNIGHT");
-
-
-        List<Batiment> batimentList = Main.generateBatiments(random.ints(1,0,10).iterator().nextInt());
-        Batiment batimentPlusProche = Main.calculateminimalDistanceForAllBatiments(reine.getCoord_x(),reine.getCoord_y(),batimentList);
-
-        String text = tapSystemOut(()->{
-            reine.build(batimentList);
-        });
-
-
-
-        assert batimentPlusProche != null;
-        assertEquals("BUILD " + batimentPlusProche.getId() + " " + reine.barracks(), text);
-
-
-    }
+    // Vérifie si le message retourné après le build correspond à ce qu'on attendait
+//    @RepeatedTest(100)
+//    public void testBuild() throws Exception {
+//        Random random = new Random();
+//        reine.setCoord_x(random.ints(1,100,1900).iterator().nextInt());
+//        reine.setCoord_y(random.ints(1,100,900).iterator().nextInt());
+//        Mockito.when(reine.barracks()).thenReturn("BARRACKS-KNIGHT");
+//
+//
+//        List<Batiment> batimentList = Main.generateBatiments(random.ints(1,0,10).iterator().nextInt());
+//        Batiment batimentPlusProche = Main.calculateminimalDistanceForAllBatiments(reine.getCoord_x(),reine.getCoord_y(),batimentList);
+//
+//        String text = tapSystemOut(()->{
+//            reine.build(batimentList);
+//        });
+//
+//
+//
+//        assert batimentPlusProche != null;
+//        assertEquals("BUILD " + batimentPlusProche.getId() + " " + reine.barracks(), text);
+//        assertEquals(0,batimentPlusProche.getOwner());
+//
+//
+//    }
 
 
 }

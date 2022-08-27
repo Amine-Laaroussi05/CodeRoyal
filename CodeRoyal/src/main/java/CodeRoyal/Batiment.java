@@ -9,6 +9,7 @@ public class Batiment {
     private int owner = -1; // owner = -1 : bâtiment non construit // owner = 0 : bâtiment allié // owner = 1 : bâtiment ennemi
     private int armyTrained = 0;
     private boolean builded = false;
+    private char armyType;
 
 
     // Constructeur
@@ -78,6 +79,9 @@ public class Batiment {
         return armyTrained;
     }
 
+    public void setArmyTrained(int armyTrained) {
+        this.armyTrained = armyTrained;
+    }
 
     public boolean isBuilded() {
         return builded;
@@ -87,6 +91,13 @@ public class Batiment {
         this.builded = builded;
     }
 
+    public char getArmyType() {
+        return armyType;
+    }
+
+    public void setArmyType(char armyType) {
+        this.armyType = armyType;
+    }
 
     @Override
     public String toString() {
