@@ -1,391 +1,124 @@
 package UnitaryTests;
 
+import CodeRoyal.Batiment;
+import CodeRoyal.Main;
 import CodeRoyal.Reine;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class TrainTest {
 
 
-    Reine reine = new Reine();
+    static Set<Integer> listeNumerosTest = new HashSet<>();
+
+    /**
+     * Le test prend en compte les cas suivants :
+     *
+     * 1. Au moins un bâtiment allié, pas assez d'or : **TRAIN**
+     *
+     * 2. Aucun bâtiment allié : **TRAIN**
+     *
+     * 3. Au moins un bâtiment allié, or compris entre 80 et 99, armyType = K : **TRAIN id**
+     *
+     * 4. Au moins un bâtiment allié, or compris entre 80 et 99, armyType = A : **TRAIN**
+     *
+     * 5. Au moins un bâtiment allié, or supérieur à 100 : **TRAIN id**
+     */
+    @RepeatedTest(1)
+    public void test() throws Exception {
+        Random random = new Random();
+        List<Batiment> batimentList = Main.generateBatiments(random.ints(1,0,10).iterator().nextInt());
+        Reine reine = new Reine();
+        int id = -1;
+        char armyType = 'O';
+        int numeroTest =0;
 
 
-    // Verify the correct output : TRAIN-{sitesID}
-//    @Test
-//    public void BuildNow_WithoutGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("-1");
-//        sitesID.put(1, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//
-//        assertEquals("TRAIN", reine.train());
-//    }
-//
-//    @Test
-//    public void AfterBuild_WithoutGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(1, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//
-//        assertEquals("TRAIN 1", reine.train());
-//    }
-//
-//    @Test
-//    public void AfterBuild_WithoutGold_Variant() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(25, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//
-//        assertEquals("TRAIN 25", reine.train());
-//    }
-//
-//    @Test
-//    public void TwoValues_WithoutGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(5, siteIdentifier);
-//
-//        List<String> siteIdentifier1 = new ArrayList<>();
-//        siteIdentifier1.add("A");
-//        siteIdentifier1.add("-1");
-//        sitesID.put(12, siteIdentifier1);
-//
-//        reine.setSitesID(sitesID);
-//
-//        assertEquals("TRAIN 5", reine.train());
-//    }
-//
-//    @Test
-//    public void ThreeValues_WithoutGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("1");
-//        sitesID.put(12, siteIdentifier);
-//
-//        List<String> siteIdentifier1 = new ArrayList<>();
-//        siteIdentifier1.add("A");
-//        siteIdentifier1.add("0");
-//        sitesID.put(16, siteIdentifier1);
-//
-//        List<String> siteIdentifier2 = new ArrayList<>();
-//        siteIdentifier2.add("K");
-//        siteIdentifier2.add("-1");
-//        sitesID.put(18, siteIdentifier2);
-//
-//        reine.setSitesID(sitesID);
-//
-//        assertEquals("TRAIN 16", reine.train());
-//    }
-//
-//    @Test
-//    public void MultipleValues_WithoutGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(64, siteIdentifier);
-//
-//        List<String> siteIdentifier1 = new ArrayList<>();
-//        siteIdentifier1.add("A");
-//        siteIdentifier1.add("0");
-//        sitesID.put(162, siteIdentifier1);
-//
-//        List<String> siteIdentifier2 = new ArrayList<>();
-//        siteIdentifier2.add("K");
-//        siteIdentifier2.add("-1");
-//        sitesID.put(81, siteIdentifier2);
-//
-//        List<String> siteIdentifier3 = new ArrayList<>();
-//        siteIdentifier3.add("K");
-//        siteIdentifier3.add("0");
-//        sitesID.put(87, siteIdentifier3);
-//
-//        List<String> siteIdentifier4 = new ArrayList<>();
-//        siteIdentifier4.add("K");
-//        siteIdentifier4.add("0");
-//        sitesID.put(32, siteIdentifier4);
-//
-//        List<String> siteIdentifier5 = new ArrayList<>();
-//        siteIdentifier5.add("K");
-//        siteIdentifier5.add("1");
-//        sitesID.put(125, siteIdentifier5);
-//
-//        List<String> siteIdentifier6 = new ArrayList<>();
-//        siteIdentifier6.add("A");
-//        siteIdentifier6.add("1");
-//        sitesID.put(157, siteIdentifier6);
-//
-//        List<String> siteIdentifier7 = new ArrayList<>();
-//        siteIdentifier7.add("K");
-//        siteIdentifier7.add("1");
-//        sitesID.put(72, siteIdentifier7);
-//
-//        List<String> siteIdentifier8 = new ArrayList<>();
-//        siteIdentifier8.add("K");
-//        siteIdentifier8.add("1");
-//        sitesID.put(119, siteIdentifier8);
-//
-//        List<String> siteIdentifier9 = new ArrayList<>();
-//        siteIdentifier9.add("A");
-//        siteIdentifier9.add("0");
-//        sitesID.put(29, siteIdentifier9);
-//
-//        List<String> siteIdentifier10 = new ArrayList<>();
-//        siteIdentifier10.add("K");
-//        siteIdentifier10.add("0");
-//        sitesID.put(104, siteIdentifier10);
-//
-//        List<String> siteIdentifier11 = new ArrayList<>();
-//        siteIdentifier11.add("A");
-//        siteIdentifier11.add("0");
-//        sitesID.put(124, siteIdentifier11);
-//
-//        List<String> siteIdentifier12 = new ArrayList<>();
-//        siteIdentifier12.add("K");
-//        siteIdentifier12.add("0");
-//        sitesID.put(23, siteIdentifier12);
-//
-//        reine.setSitesID(sitesID);
-//
-//        assertEquals("TRAIN 64", reine.train());
-//    }
-//
-//
-//    @Test
-//    public void EmptyHashmap() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        reine.setSitesID(sitesID);
-//
-//        assertEquals("TRAIN", reine.train());
-//    }
-//
-//
-//    // Verify the update of gold
-//    @Test
-//    public void BuildNow_WithGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("-1");
-//        sitesID.put(1, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//        reine.setGold(100);
-//        reine.train();
-//
-//        assertEquals(100, reine.getGold());
-//    }
-//
-//    @Test
-//    public void AfterBuild_WithGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(1, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//        reine.setGold(100);
-//        reine.train();
-//
-//        assertEquals(20, reine.getGold());
-//    }
-//
-//    @Test
-//    public void AfterBuild_WithGold_Archer() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("A");
-//        siteIdentifier.add("0");
-//        sitesID.put(1, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//        reine.setGold(100);
-//        reine.train();
-//
-//        assertEquals(0, reine.getGold());
-//    }
-//
-//    @Test
-//    public void TwoValues_WithGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(5, siteIdentifier);
-//
-//        List<String> siteIdentifier1 = new ArrayList<>();
-//        siteIdentifier1.add("A");
-//        siteIdentifier1.add("-1");
-//        sitesID.put(12, siteIdentifier1);
-//
-//        reine.setSitesID(sitesID);
-//        reine.setGold(170);
-//        reine.train();
-//
-//        assertEquals(90, reine.getGold());
-//    }
-//
-//    @Test
-//    public void InsufficientGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(1, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//        reine.setGold(50);
-//        reine.train();
-//
-//        assertEquals(50, reine.getGold());
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//    // Verify the update of sitesID
-//    @Test
-//    public void AfterTrain_BuildNow() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("-1");
-//        sitesID.put(1, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//        reine.train();
-//        List<String> expectedSiteIdentifier = new ArrayList<>();
-//        expectedSiteIdentifier.add("K");
-//        expectedSiteIdentifier.add("-1");
-//        HashMap<Integer, List<String>> expectedsitesID = new HashMap<>();
-//        expectedsitesID.put(1, expectedSiteIdentifier);
-//        assertEquals(expectedsitesID, reine.getSitesID());
-//    }
-//
-//    @Test
-//    public void AfterTrain_AfterBuild_WithoutGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(1, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//        reine.train();
-//        List<String> expectedSiteIdentifier = new ArrayList<>();
-//        expectedSiteIdentifier.add("K");
-//        expectedSiteIdentifier.add("1");
-//        HashMap<Integer, List<String>> expectedsitesID = new HashMap<>();
-//        expectedsitesID.put(1, expectedSiteIdentifier);
-//        assertEquals(expectedsitesID, reine.getSitesID());
-//    }
-//
-//
-//    @Test
-//    public void After_Train_AfterBuild_WithoutGold_Variant() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(25, siteIdentifier);
-//        reine.setSitesID(sitesID);
-//        reine.train();
-//        List<String> expectedSiteIdentifier = new ArrayList<>();
-//        expectedSiteIdentifier.add("K");
-//        expectedSiteIdentifier.add("1");
-//        HashMap<Integer, List<String>> expectedsitesID = new HashMap<>();
-//        expectedsitesID.put(25, expectedSiteIdentifier);
-//        assertEquals(expectedsitesID, reine.getSitesID());
-//    }
-//
-//    @Test
-//    public void AfterTrain_TwoValues_WithoutGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("0");
-//        sitesID.put(5, siteIdentifier);
-//
-//        List<String> siteIdentifier1 = new ArrayList<>();
-//        siteIdentifier1.add("A");
-//        siteIdentifier1.add("-1");
-//        sitesID.put(12, siteIdentifier1);
-//
-//        reine.setSitesID(sitesID);
-//        reine.train();
-//        List<String> expectedSiteIdentifier = new ArrayList<>();
-//        expectedSiteIdentifier.add("K");
-//        expectedSiteIdentifier.add("1");
-//        List<String> expectedSiteIdentifier1 = new ArrayList<>();
-//        expectedSiteIdentifier1.add("A");
-//        expectedSiteIdentifier1.add("-1");
-//        HashMap<Integer, List<String>> expectedsitesID = new HashMap<>();
-//        expectedsitesID.put(5, expectedSiteIdentifier);
-//        expectedsitesID.put(12, expectedSiteIdentifier1);
-//        assertEquals(expectedsitesID, reine.getSitesID());
-//
-//    }
-//
-//
-//    @Test
-//    public void AfterTrain_ThreeValues_WithoutGold() {
-//        HashMap<Integer, List<String>> sitesID = new HashMap<>();
-//        List<String> siteIdentifier = new ArrayList<>();
-//        siteIdentifier.add("K");
-//        siteIdentifier.add("1");
-//        sitesID.put(12, siteIdentifier);
-//
-//        List<String> siteIdentifier1 = new ArrayList<>();
-//        siteIdentifier1.add("A");
-//        siteIdentifier1.add("0");
-//        sitesID.put(16, siteIdentifier1);
-//
-//        List<String> siteIdentifier2 = new ArrayList<>();
-//        siteIdentifier2.add("K");
-//        siteIdentifier2.add("-1");
-//        sitesID.put(18, siteIdentifier2);
-//
-//        reine.setSitesID(sitesID);
-//        reine.train();
-//        List<String> expectedSiteIdentifier = new ArrayList<>();
-//        expectedSiteIdentifier.add("K");
-//        expectedSiteIdentifier.add("1");
-//        List<String> expectedSiteIdentifier1 = new ArrayList<>();
-//        expectedSiteIdentifier1.add("A");
-//        expectedSiteIdentifier1.add("1");
-//        List<String> expectedSiteIdentifier2 = new ArrayList<>();
-//        expectedSiteIdentifier2.add("K");
-//        expectedSiteIdentifier2.add("-1");
-//        HashMap<Integer, List<String>> expectedsitesID = new HashMap<>();
-//        expectedsitesID.put(12, expectedSiteIdentifier);
-//        expectedsitesID.put(16, expectedSiteIdentifier1);
-//        expectedsitesID.put(18, expectedSiteIdentifier2);
-//        assertEquals(expectedsitesID, reine.getSitesID());
-//    }
+        // On initialise aléatoirement les valeurs de chaque bâtiment
+        for(Batiment batiment: batimentList){
+            batiment.setOwner(random.ints(1,-1,2).iterator().nextInt());
+            batiment.setArmyTrained(random.ints(1,0,3).iterator().nextInt());
+            if(random.ints(1,0,2).iterator().nextInt() == 0) batiment.setArmyType('K');
+            else batiment.setArmyType('A');
+        }
+
+        // On détermine si la liste contient un bâtiment allié (owner = 0)
+        boolean haveBatimentAllieAndArmyTrained = false;
+        for(Batiment batiment: batimentList){
+            if (batiment.getOwner() == 0 & batiment.getArmyTrained() == 0) {
+                haveBatimentAllieAndArmyTrained = true;
+                break;
+            }
+        }
+
+        // On assigne un nombre aléatoire d'or à la reine
+        int gold = random.ints(1,0,120).iterator().nextInt();
+        reine.setGold(gold);
+
+        // On ordonne la liste du bâtiment le plus proche de la reine au bâtiment le plus loin
+        batimentList.sort((batiment1, batiment2) -> (int) Main.distanceEntreDeuxBatimentsAvecLaReine(batiment1,batiment2,reine.getCoord_x(),reine.getCoord_y()));
+
+        // On détermine le numéro du test selon les données actuelles
+        if(!haveBatimentAllieAndArmyTrained){
+            numeroTest = 2;
+            listeNumerosTest.add(numeroTest);
+        }
+        else if(reine.getGold() < 80){
+            numeroTest = 1;
+            listeNumerosTest.add(numeroTest);
+        }
+        else {
+            for(Batiment batiment: batimentList){
+                if(batiment.getOwner() == 0 & batiment.getArmyTrained() == 0){
+                    id = batiment.getId();
+                    armyType = batiment.getArmyType();
+                    break;
+                }
+            }
+            if(reine.getGold() >= 80 & reine.getGold() < 100 & armyType == 'K'){
+                numeroTest = 3;
+                listeNumerosTest.add(numeroTest);
+            }
+            else if(reine.getGold() >= 80 & reine.getGold() < 100 & armyType == 'A'){
+                numeroTest = 4;
+                listeNumerosTest.add(numeroTest);
+            }
+            else if(reine.getGold() >= 100){
+                numeroTest = 5;
+                listeNumerosTest.add(numeroTest);
+            }
+        }
+
+        System.out.println("Numéro du test: " + numeroTest);
+        // On lance les assertions dépendamment du numéro du test obtenu
+        switch(numeroTest){
+            case 1:
+            case 2:
+            case 4:
+                assertEquals("TRAIN",reine.train(batimentList));
+                break;
+            case 3:
+            case 5:
+                    assertEquals("TRAIN " + id, reine.train(batimentList));
+        }
+
+    }
+
+
+
+
+
+    /**
+     * Affiche les numéros de test qui ont été lancés durant les tests
+     */
+    @AfterAll
+    public static void tearDown(){
+        System.out.println(listeNumerosTest);
+    }
 
 }

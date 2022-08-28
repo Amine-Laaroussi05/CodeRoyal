@@ -345,6 +345,7 @@ public class Reine {
                 batiment.setArmyTrained(1);
                 return "TRAIN " + batiment.getId();
             }
+            else if(batiment.getArmyTrained() == 0 & batiment.getArmyType() == 'A' & gold < 100) return "TRAIN";
         }
         // S'il n'y a pas de possibilité d'entrainement (par exemple une liste vide, ou des bâtiments avec que des archers et l'or en possession est < 100)
         return "TRAIN";
