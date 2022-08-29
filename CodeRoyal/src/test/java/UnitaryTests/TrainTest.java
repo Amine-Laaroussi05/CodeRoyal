@@ -5,7 +5,6 @@ import CodeRoyal.Main;
 import CodeRoyal.Reine;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
@@ -29,7 +28,7 @@ class TrainTest {
      *
      * 5. Au moins un bâtiment allié, or supérieur à 100 : **TRAIN id**
      */
-    @RepeatedTest(1)
+    @RepeatedTest(1000)
     public void test() throws Exception {
         Random random = new Random();
         List<Batiment> batimentList = Main.generateBatiments(random.ints(1,0,10).iterator().nextInt());
@@ -61,7 +60,7 @@ class TrainTest {
         reine.setGold(gold);
 
         // On ordonne la liste du bâtiment le plus proche de la reine au bâtiment le plus loin
-        batimentList.sort((batiment1, batiment2) -> (int) Main.distanceEntreDeuxBatimentsAvecLaReine(batiment1,batiment2,reine.getCoord_x(),reine.getCoord_y()));
+        batimentList.sort((batiment1, batiment2) -> (int) Main.compareDistanceEntreDeuxBatimentsAvecLaReine(batiment1,batiment2,reine.getCoord_x(),reine.getCoord_y()));
 
         // On détermine le numéro du test selon les données actuelles
         if(!haveBatimentAllieAndArmyTrained){

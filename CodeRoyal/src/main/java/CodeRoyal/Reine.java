@@ -328,7 +328,7 @@ public class Reine {
         }
 
         // On ordonne la liste selon la plus petite distance avec la reine (on cherche à entrainer l'armée dont le bâtiment est le plus proche de la reine)
-        batimentListOwned.sort((batiment1, batiment2) -> (int) Main.distanceEntreDeuxBatimentsAvecLaReine(batiment1,batiment2, coord_x,coord_y));
+        batimentListOwned.sort((batiment1, batiment2) -> (int) Main.compareDistanceEntreDeuxBatimentsAvecLaReine(batiment1,batiment2, coord_x,coord_y));
 
         // On lance le cycle d'entrainements des armées
         armyTrain(batimentListOwned);
