@@ -5,7 +5,6 @@ import CodeRoyal.Batiment;
 import CodeRoyal.Main;
 import CodeRoyal.Reine;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -17,7 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-class calculateMinimalDistanceTest {
+class CalculateMinimalDistanceTest {
 
 
     // Compteur de test qui servira à indiquer l'index de la liste dans le test paramétré.

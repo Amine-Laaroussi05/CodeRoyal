@@ -78,6 +78,45 @@ public class Reine {
 
 
 
+    /**
+     * Déplacement de la reine
+     */
+    public void Move(List<Batiment> batimentList){
+
+
+//            Vérifie si on est dans le bon carré de taille 1920x1000
+        if(this.coord_x + 60 > 1920 && this.direction_horizontale){
+            this.direction_horizontale = false;
+            this.choix_direction = false;
+        } else if(this.coord_x - 60 < 0 && !this.direction_horizontale){
+            this.direction_horizontale = true;
+            this.choix_direction = false;
+        }
+        if(this.coord_y + 60 > 1000 && this.direction_verticale){
+            this.direction_verticale = false;
+        } else if(this.coord_y - 60 < 0 && !this.direction_verticale){
+            this.direction_verticale = true;
+        }
+
+//          La reine se déplace horizontalement jusqu'à arriver au bord, puis descend ou monte de 60 et se déplace à nouveau horizontalement dans l'autre sens
+        if(this.choix_direction){
+            if(this.direction_horizontale){
+                this.coord_x += 60;
+            } else{
+                this.coord_x -= 60;
+            }
+        } else{
+            if(this.direction_verticale){
+                this.coord_y += 60;
+            } else{
+                this.coord_y -= 60;
+            }
+            this.choix_direction = true;
+        }
+
+
+        System.out.println("MOVE " + coord_x + " " + coord_y);
+    }
 
 
 
@@ -91,8 +130,9 @@ public class Reine {
     public void moveToAdverseBarrack(List<Batiment> batimentList){
         int indexBatiment = Main.calculateMinimalDistance(coord_x,coord_y,batimentList);
         if(indexBatiment != -1){
-            coord_x = batimentList.get(indexBatiment).getCoord_x();
-            coord_y = batimentList.get(indexBatiment).getCoord_y();
+            coord_x += 60;
+            coord_y += 60;
+            System.out.println("MOVE " + batimentList.get(indexBatiment).getCoord_x() + " " + batimentList.get(indexBatiment).getCoord_y());
         }
     }
 
@@ -108,26 +148,18 @@ public class Reine {
      * @param batimentList : la liste des bâtiments présents sur la carte.
      */
     public void moveOrBuild(List<Batiment> batimentList) throws Exception {
-        for(Batiment batiment: batimentList) System.out.println(batiment.toString());
         if(batimentList.size() > 0){
-            System.out.println("IF---------> Liste length: " + batimentList.size());
             Batiment batiment = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
-            assert batiment != null;
-            System.out.println(batiment.toString());
             double distance = Math.sqrt(Math.pow(coord_x - batiment.getCoord_x(),2) + Math.pow(coord_y - batiment.getCoord_y(),2));
-            System.out.println("distance du bâtiment: " + distance);
             if(distance <= 30 & batiment.getOwner() != 0) {
-                System.out.println("builded!");
                 build(batimentList);
             }
             else{
-                System.out.println("movement!");
                 kinfOfMove(batimentList);
             }
         }
         else{
             kinfOfMove(batimentList);
-            System.out.println("movement with empty list");
         }
 
     }
@@ -293,7 +325,7 @@ public class Reine {
 
 
 
-        System.out.print("BUILD " + batimentPlusProche.getId() + " " + barracks(batimentPlusProche));
+        System.out.println("BUILD " + batimentPlusProche.getId() + " " + barracks(batimentPlusProche));
         batimentPlusProche.setOwner(0);
 
 

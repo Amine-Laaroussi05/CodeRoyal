@@ -68,7 +68,7 @@ public class BuildTest {
 //    }
 
 
-    @RepeatedTest(1000)
+    @RepeatedTest(10)
     public void test() throws Exception {
         Random random = new Random();
         reine.setGold(100);
@@ -113,7 +113,9 @@ public class BuildTest {
             reine.build(batimentList);
         });
 
-        assertEquals("BUILD " + batimentListNotOwner.get(0).getId() + " " + "BARRACKS-ARCHER", texte);
+        String expectedTexte = "BUILD " + batimentListNotOwner.get(0).getId() + " " + "BARRACKS-ARCHER" + System.lineSeparator();
+
+        assertEquals(expectedTexte, texte);
     }
 
 

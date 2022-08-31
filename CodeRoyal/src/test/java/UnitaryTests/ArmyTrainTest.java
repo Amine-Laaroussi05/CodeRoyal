@@ -14,7 +14,7 @@ import java.util.Random;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class armyTrainTest {
+class ArmyTrainTest {
     static Random random = new Random();
     static List<Batiment> batimentList = Main.generateBatiments(random.ints(1,0,10).iterator().nextInt());
     static Iterator<Batiment> iterator = batimentList.iterator();

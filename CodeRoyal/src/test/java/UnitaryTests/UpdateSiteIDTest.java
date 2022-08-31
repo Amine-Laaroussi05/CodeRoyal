@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class updateSiteIDTest {
+class UpdateSiteIDTest {
 
     Reine reine = new Reine();
 
