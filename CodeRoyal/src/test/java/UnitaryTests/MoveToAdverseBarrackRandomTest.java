@@ -47,12 +47,14 @@ public class MoveToAdverseBarrackRandomTest {
      * 3.4 Le bâtiment a une coordonnée 'x' plus petite que la coordonnée 'y' de la reine, et une coordonnée 'y' plus grande que la coordonnée 'y' de la reine.
      *
      */
-    @RepeatedTest(1)
+    @RepeatedTest(1000)
     public void test(){
         int coord_x = random.ints(1,100,1920).iterator().nextInt();
         reine.setCoord_x(coord_x);
+        System.out.println("Reine coord_x = " + coord_x);
         int coord_y = random.ints(1,100,1000).iterator().nextInt();
         reine.setCoord_y(coord_y);
+        System.out.println("Reine coord_y = " + coord_y);
 
         int indiceBatimentPlusProche = Main.calculateMinimalDistance(reine.getCoord_x(),reine.getCoord_y(),batimentList);
 
@@ -82,22 +84,22 @@ public class MoveToAdverseBarrackRandomTest {
                 case 11:
                     System.out.println("Numero Test: " + numeroTest);
                     numeroTestSet.add(numeroTest);
-                    assertEquals(coord_x+60,reine.getCoord_x());
+                    assertEquals(coord_y+60,reine.getCoord_y());
                     break;
                 case 12:
                     System.out.println("Numero Test: " + numeroTest);
                     numeroTestSet.add(numeroTest);
-                    assertEquals(coord_x-60,reine.getCoord_x());
+                    assertEquals(coord_y-60,reine.getCoord_y());
                     break;
                 case 21:
                     System.out.println("Numero Test: " + numeroTest);
                     numeroTestSet.add(numeroTest);
-                    assertEquals(coord_y+60,reine.getCoord_y());
+                    assertEquals(coord_x+60,reine.getCoord_x());
                     break;
                 case 22:
                     System.out.println("Numero Test: " + numeroTest);
                     numeroTestSet.add(numeroTest);
-                    assertEquals(coord_y-60,reine.getCoord_y());
+                    assertEquals(coord_x-60,reine.getCoord_x());
                     break;
                 case 31:
                     System.out.println("Numero Test: " + numeroTest);

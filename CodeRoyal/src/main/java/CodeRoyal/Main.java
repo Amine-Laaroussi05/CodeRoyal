@@ -98,8 +98,8 @@ public class Main {
         int index = 0;
         for(Batiment batiment: batimentList){
             if(batiment.getOwner() == 1){
-                double distance = Math.sqrt(Math.pow(coord_x -batiment.getCoord_x(),2) + Math.pow(coord_x - batiment.getCoord_y(),2));
-                if(distance <= distanceMin | distanceMin == -1){
+                double distance = Math.sqrt(Math.pow(coord_x -batiment.getCoord_x(),2) + Math.pow(coord_y - batiment.getCoord_y(),2));
+                if(distance < distanceMin | distanceMin == -1){
                     distanceMin = distance;
                     indexBatiment = index;
                 }

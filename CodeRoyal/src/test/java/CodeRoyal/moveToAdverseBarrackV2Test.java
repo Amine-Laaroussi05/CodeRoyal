@@ -11,15 +11,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class moveToAdverseBarrackV2Test {
+class MoveToAdverseBarrackV2Test {
 
-    static Reine reine = new Reine();
+    Reine reine = new Reine();
     static HashMap<Integer,List<Batiment>> batimentsHashmap = new HashMap<>();
     static File batimentsFile = new File("src/main/resources/moveToAdverseBarrackV2Test/batiments.csv");
     static int id = 1;
 
     static String ligne;
-    int numeroTest = 1;
+    static int numeroTest = 1;
 
 
 
@@ -54,11 +54,16 @@ class moveToAdverseBarrackV2Test {
     }
 
 
-    @ParameterizedTest(name = "coord_x = {0} & coord_y = {1}")
+    @ParameterizedTest(name = "coord_x = {0} , coord_y = {1}")
     @CsvFileSource(resources = "/moveToAdverseBarrackV2Test/reineCoordinates.csv", numLinesToSkip = 1)
     public void test(int coord_x, int coord_y, int expectedCoord_x, int expecetdCoord_y){
         reine.setCoord_x(coord_x);
+        System.out.println("Reine coord_x = " + reine.getCoord_x());
         reine.setCoord_y(coord_y);
+        System.out.println("Reine coord_y = " + reine.getCoord_y());
+        for(Batiment batiment: batimentsHashmap.get(numeroTest)){
+            System.out.println(batiment.toString());
+        }
         reine.moveToAdverseBarrack(batimentsHashmap.get(numeroTest++));
         assertEquals(expectedCoord_x, reine.getCoord_x());
         assertEquals(expecetdCoord_y, reine.getCoord_y());
