@@ -128,13 +128,17 @@ public class Reine {
      * @param batimentList : La liste des bâtiments présents sur la carte.
      */
     public void moveToAdverseBarrack(List<Batiment> batimentList){
-        int indexBatiment = Main.calculateMinimalDistance(coord_x,coord_y,batimentList);
+        int indexBatiment = Main.calculateMinimalDistance(coord_x,coord_y,batimentList); // Indice du bâtiment ennemi le plus proche de la reine (-1 s'il n'y a aucun bâtiment ennemi)
         if(indexBatiment != -1){
-            if(batimentList.get(indexBatiment).getCoord_y() > coord_y) coord_y += 60;
-            else if(batimentList.get(indexBatiment).getCoord_y() < coord_y) coord_y -= 60;
+            if(batimentList.get(indexBatiment).getCoord_y() > coord_y + 60) coord_y += 60;
+            else if(batimentList.get(indexBatiment).getCoord_y() > coord_y) coord_y = batimentList.get(indexBatiment).getCoord_y();
+            else if(batimentList.get(indexBatiment).getCoord_y() < coord_y - 60) coord_y -= 60;
+            else if(batimentList.get(indexBatiment).getCoord_y() < coord_y) coord_y = batimentList.get(indexBatiment).getCoord_y();
 
-            if(batimentList.get(indexBatiment).getCoord_x() > coord_x) coord_x += 60;
-            else if(batimentList.get(indexBatiment).getCoord_x() < coord_x) coord_x -= 60;
+            if(batimentList.get(indexBatiment).getCoord_x() > coord_x + 60) coord_x += 60;
+            else if(batimentList.get(indexBatiment).getCoord_x() > coord_x) coord_x = batimentList.get(indexBatiment).getCoord_x();
+            else if(batimentList.get(indexBatiment).getCoord_x() < coord_x - 60 ) coord_x -= 60;
+            else if(batimentList.get(indexBatiment).getCoord_x() < coord_x) coord_x = batimentList.get(indexBatiment).getCoord_x();
 
             System.out.println("MOVE " + batimentList.get(indexBatiment).getCoord_x() + " " + batimentList.get(indexBatiment).getCoord_y());
         }

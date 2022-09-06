@@ -39,7 +39,7 @@ public void moveToAdverseBarrack(List<Batiment> batimentList){
    
    - Le bâtiment a une coordonnée 'x' plus grande que la coordonnée 'x' de la reine.
    
-   - Le bâtiment a une coordonnée 'x' plus petite que la coordonnée 'y' de la reine.
+   - Le bâtiment a une coordonnée 'x' plus petite que la coordonnée 'x' de la reine.
 
 3. Le bâtiment ennemi le plus proche et la reine ont différentes coordonnées x et y.
    
@@ -85,7 +85,7 @@ public void moveToAdverseBarrack(List<Batiment> batimentList){
 
 ## data
 
-1. 
+#### 1.
 
 ```java
 reine.coord_x = 100
@@ -129,13 +129,14 @@ reine.coord_y = 340
 
 ---
 
-2. 
+#### 2.
 
 ```java
 reine.coord_x = 500
 reine.coord_y = 700
 
-batiment.coord_x = 550
+
+batiment.coord_x = 600
 batiment.coord_y = 700
 batiment.owner = 1
 
@@ -159,7 +160,7 @@ batiment.coord_x = 100
 batiment.coord_y = 300
 batiment.owner = 1
 
-batiment.coord_x = 1780
+batiment.coord_x = 1700
 batiment.coord_y = 900
 batiment.owner = 1
 
