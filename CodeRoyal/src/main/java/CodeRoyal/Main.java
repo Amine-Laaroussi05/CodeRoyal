@@ -141,7 +141,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
-        List<Batiment> batimentList = generateBatiments(1);
+        List<Batiment> batimentList = generateBatiments(10);
         Reine reine = new Reine();
         for(int index = 1; index < 1300; index++){
             System.out.println("Tour : " + index);
@@ -150,7 +150,7 @@ public class Main {
             System.out.println("Batiment coord_x = " + calculateminimalDistanceForAllBatiments(reine.getCoord_x(),reine.getCoord_y(),batimentList).getCoord_x());
             System.out.println("Batiment coord_y = " + calculateminimalDistanceForAllBatiments(reine.getCoord_x(),reine.getCoord_y(),batimentList).getCoord_y());
             reine.moveOrBuild(batimentList);
-            reine.train(batimentList);
+            System.out.println(reine.train(batimentList));
         }
 
 
