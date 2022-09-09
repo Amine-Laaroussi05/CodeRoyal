@@ -1,0 +1,10 @@
+numeroTest,coord_x,coord_y,owner,recentlyBuilded
+1,100,200,-1,false
+1,300,400,0,true
+1,500,600,1,false
+2,100,200,-1,false
+2,300,400,0,false
+2,500,600,1,false
+3,100,200,-1,false
+3,300,400,0,false
+3,500,600,1,true

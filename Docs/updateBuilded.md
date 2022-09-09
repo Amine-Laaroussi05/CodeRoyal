@@ -105,5 +105,3 @@ batiments[0].recentlyBuilded = false
 batiments[1].recentlyBuilded = false
 batiments[2].recentlyBuilded = true
 ```
-
-

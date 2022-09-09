@@ -343,6 +343,20 @@ public class Reine {
 
 
 
+    /**
+     * La méthode `updateBuilded` permet de mettre à jour le statut (attribut) `recentlyBuilded` d'un bâtiment en `false`.
+     * Le besoin d'une telle méthode réside dans le fait de prendre en compte l'état d'un bâtiment
+     * (récemment builded ou non) pour éviter de `Build` le bâtiment et `Train` une armée du bâtiment
+     * dans le même tour du jeu.
+     * @param batimentList : une liste de bâtiments
+     */
+    public void updateBuilded(List<Batiment> batimentList){
+
+    }
+
+
+
+
 
 
 

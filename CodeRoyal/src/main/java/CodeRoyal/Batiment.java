@@ -8,13 +8,13 @@ public class Batiment {
     private int coord_y;
     private int owner = -1; // owner = -1 : bâtiment non construit // owner = 0 : bâtiment allié // owner = 1 : bâtiment ennemi
     private int armyTrained = 0;
-    private boolean builded = false;
+    private boolean recentlyBuilded = false;
     private char armyType;
 
 
     // Constructeur
 
-    public Batiment(int id, int coord_x, int coord_y, int owner, boolean builded) {
+    public Batiment(int id, int coord_x, int coord_y, int owner, boolean recentlyBuilded) {
         if(coord_x < 0 | coord_x > 1920){
             throw new IllegalArgumentException("La coordonnée x doit être comprises entre 0 et 1920");
         }
@@ -28,7 +28,7 @@ public class Batiment {
         this.coord_x = coord_x;
         this.coord_y = coord_y;
         this.owner = owner;
-        this.builded = builded;
+        this.recentlyBuilded = recentlyBuilded;
     }
 
 
@@ -83,12 +83,12 @@ public class Batiment {
         this.armyTrained = armyTrained;
     }
 
-    public boolean isBuilded() {
-        return builded;
+    public boolean isRecentlyBuilded() {
+        return recentlyBuilded;
     }
 
-    public void setBuilded(boolean builded) {
-        this.builded = builded;
+    public void setRecentlyBuilded(boolean recentlyBuilded) {
+        this.recentlyBuilded = recentlyBuilded;
     }
 
     public char getArmyType() {
@@ -107,7 +107,7 @@ public class Batiment {
         sb.append(", coord_y=").append(coord_y);
         sb.append(", owner=").append(owner);
         sb.append(", armyTrained=").append(armyTrained);
-        sb.append(", builded=").append(builded);
+        sb.append(", builded=").append(recentlyBuilded);
         sb.append('}');
         return sb.toString();
     }
