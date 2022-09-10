@@ -74,6 +74,8 @@ public class Reine {
             }
             this.choix_direction = true;
         }
+
+        System.out.println("MOVE " + coord_x + " " + coord_y);
     }
 
 
@@ -334,6 +336,7 @@ public class Reine {
 
 
         System.out.println("BUILD " + batimentPlusProche.getId() + " " + barracks(batimentPlusProche));
+        batimentPlusProche.setRecentlyBuilded(true);
         batimentPlusProche.setOwner(0);
 
 
@@ -392,11 +395,13 @@ public class Reine {
 
         // On vérifie s'il y a un bâtiment disponible (armyTrained = 0) pour pouvoir lance l'entrainement d'une armée
         for(Batiment batiment: batimentListOwned){
-            if(batiment.getArmyTrained() == 0 & batiment.getArmyType() == 'K'){
+            if(batiment.getArmyTrained() == 0 & batiment.getArmyType() == 'K' & !batiment.isRecentlyBuilded()){
                 batiment.setArmyTrained(1);
+                gold -= 80;
                 return "TRAIN " + batiment.getId();
-            } else if(batiment.getArmyTrained() == 0 & batiment.getArmyType() == 'A' & gold >= 100){
+            } else if(batiment.getArmyTrained() == 0 & batiment.getArmyType() == 'A' & gold >= 100 & !batiment.isRecentlyBuilded()){
                 batiment.setArmyTrained(1);
+                gold -= 100;
                 return "TRAIN " + batiment.getId();
             }
             else if(batiment.getArmyTrained() == 0 & batiment.getArmyType() == 'A' & gold < 100) return "TRAIN";
