@@ -22,7 +22,7 @@ public class UpdateBuildedTest {
     static File batimentsFile = new File("src/main/resources/updateBuildedTest/batiments.csv");
     static String ligne;
     static int id;
-    int numeroTest = 1;
+    static int numeroTest = 1;
     Reine reine = new Reine();
 
 
@@ -52,7 +52,6 @@ public class UpdateBuildedTest {
                 lastInteger++;
             }
         }
-
         batimentsHashMap.put(lastInteger,batimentList);
         batimentsBuffer.close();
     }
@@ -61,12 +60,6 @@ public class UpdateBuildedTest {
     @CsvFileSource(resources = "/updateBuildedTest/expected.csv", numLinesToSkip = 1)
     public void test(boolean expected1, boolean expected2, boolean expected3){
         reine.updateBuilded(batimentsHashMap.get(numeroTest));
-        System.out.println("expected1 : " + expected1);
-        System.out.println("recentlyBuilded = " + batimentsHashMap.get(numeroTest).get(0).isRecentlyBuilded());
-        System.out.println("expected2 : " + expected2);
-        System.out.println("recentlyBuilded = " + batimentsHashMap.get(numeroTest).get(1).isRecentlyBuilded());
-        System.out.println("expected3 : " + expected3);
-        System.out.println("recentlyBuilded = " + batimentsHashMap.get(numeroTest).get(2).isRecentlyBuilded());
         assertEquals(expected1, batimentsHashMap.get(numeroTest).get(0).isRecentlyBuilded());
         assertEquals(expected2, batimentsHashMap.get(numeroTest).get(1).isRecentlyBuilded());
         assertEquals(expected3, batimentsHashMap.get(numeroTest++).get(2).isRecentlyBuilded());

@@ -351,7 +351,7 @@ public class Reine {
      * @param batimentList : une liste de bâtiments
      */
     public void updateBuilded(List<Batiment> batimentList){
-
+        for(Batiment batiment: batimentList) if(batiment.getOwner() == 0) batiment.setRecentlyBuilded(false);
     }
 
 
