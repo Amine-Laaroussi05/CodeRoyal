@@ -61,6 +61,7 @@ public class MoveToAdverseBarrackRandomTest {
         int coord_y = random.ints(1, 100, 1000).iterator().nextInt();
         reine.setCoord_y(coord_y);
         System.out.println("Reine coord_y = " + coord_y);
+        reine.setBatimentList(batimentList);
 
         int indiceBatimentPlusProche = Main.calculateMinimalDistance(reine.getCoord_x(), reine.getCoord_y(), batimentList);
 
@@ -78,7 +79,7 @@ public class MoveToAdverseBarrackRandomTest {
         else if (batimentList.get(indiceBatimentPlusProche).getCoord_y() < reine.getCoord_y()) numeroTest += "4";
 
 
-        reine.moveToAdverseBarrack(batimentList);
+        reine.moveToAdverseBarrack();
         // On exécute l'assertion suivant le numéro du test
         switch (Integer.parseInt(numeroTest)) {
             case 11:

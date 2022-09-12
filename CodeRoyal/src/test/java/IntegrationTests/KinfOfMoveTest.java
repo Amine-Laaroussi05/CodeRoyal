@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-class kinfOfMoveTest {
+class KinfOfMoveTest {
 
     public static int numeroTest = 1;
 
@@ -96,8 +96,9 @@ class kinfOfMoveTest {
 
         reine.setCoord_x(reineList.get(numeroTest-1).getCoord_x());
         reine.setCoord_y(reineList.get(numeroTest-1).getCoord_y());
+        reine.setBatimentList(batimentsHashMap.get(numeroTest));
         reine.kinfOfMove(batimentsHashMap.get(numeroTest));
-        if(expectedMethod.equals("moveToAdverseBarrack")) Mockito.verify(reine).moveToAdverseBarrack(batimentsHashMap.get(numeroTest));
+        if(expectedMethod.equals("moveToAdverseBarrack")) Mockito.verify(reine).moveToAdverseBarrack();
         else Mockito.verify(reine).Move();
         numeroTest++;
 

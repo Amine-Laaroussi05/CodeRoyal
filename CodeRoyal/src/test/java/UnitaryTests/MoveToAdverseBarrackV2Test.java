@@ -63,12 +63,14 @@ class MoveToAdverseBarrackV2Test {
         System.out.println("Reine coord_x = " + reine.getCoord_x());
         reine.setCoord_y(coord_y);
         System.out.println("Reine coord_y = " + reine.getCoord_y());
+        reine.setBatimentList(batimentsHashmap.get(numeroTest));
         for(Batiment batiment: batimentsHashmap.get(numeroTest)){
             System.out.println(batiment.toString());
         }
-        reine.moveToAdverseBarrack(batimentsHashmap.get(numeroTest++));
+        reine.moveToAdverseBarrack();
         assertEquals(expectedCoord_x, reine.getCoord_x());
         assertEquals(expecetdCoord_y, reine.getCoord_y());
+        numeroTest++;
     }
 
 

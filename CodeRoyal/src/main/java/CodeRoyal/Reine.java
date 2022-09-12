@@ -21,9 +21,8 @@ public class Reine {
 
     private int gold = 100;
 
-    private HashMap<Integer, List<String>> sitesID = new HashMap<>();
-
     private int compteurKnight = 0;
+    private List<Batiment> batimentList;
 
 
 
@@ -87,9 +86,8 @@ public class Reine {
 
     /**
      * Pour déplacer la reine vers le bâtiment adverse le plus proche.
-     * @param batimentList : La liste des bâtiments présents sur la carte.
      */
-    public void moveToAdverseBarrack(List<Batiment> batimentList){
+    public void moveToAdverseBarrack(){
         int indexBatiment = Main.calculateMinimalDistance(coord_x,coord_y,batimentList); // Indice du bâtiment ennemi le plus proche de la reine (-1 s'il n'y a aucun bâtiment ennemi)
         if(indexBatiment != -1){
             if(batimentList.get(indexBatiment).getCoord_y() > coord_y + 60) coord_y += 60;
@@ -153,7 +151,7 @@ public class Reine {
             double distanceReineBatimentPlusProche = Math.sqrt(Math.pow(batimentList.get(indexBatimentPlusProche).getCoord_x() - coord_x, 2)
                     + Math.pow(batimentList.get(indexBatimentPlusProche).getCoord_y() - coord_y, 2));
             if(distanceReineBatimentPlusProche < 30) Move();
-            else moveToAdverseBarrack(batimentList);
+            else moveToAdverseBarrack();
         }
     }
 
@@ -368,20 +366,19 @@ public class Reine {
         this.gold = gold;
     }
 
-    public HashMap<Integer, List<String>> getSitesID() {
-        return sitesID;
-    }
-
-    public void setSitesID(HashMap<Integer, List<String>> sitesID) {
-        this.sitesID = sitesID;
-    }
-
-
     public int getCompteurKnight() {
         return compteurKnight;
     }
 
     public void setCompteurKnight(int compteurKnight) {
         this.compteurKnight = compteurKnight;
+    }
+
+    public List<Batiment> getBatimentList() {
+        return batimentList;
+    }
+
+    public void setBatimentList(List<Batiment> batimentList) {
+        this.batimentList = batimentList;
     }
 }

@@ -143,6 +143,7 @@ public class Main {
 
         List<Batiment> batimentList = generateBatiments(10);
         Reine reine = new Reine();
+        reine.setBatimentList(batimentList);
         for(int index = 1; index < 1300; index++){
             System.out.println("Tour : " + index);
             System.out.println("Reine coord_x = " + reine.getCoord_x());
