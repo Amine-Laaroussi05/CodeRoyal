@@ -4,7 +4,6 @@ import CodeRoyal.Batiment;
 import CodeRoyal.Main;
 import CodeRoyal.Reine;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -14,9 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class moveOrBuildTest {
+class MoveOrBuildTest {
 
     @Spy
     Reine reine = new Reine();
@@ -47,7 +44,7 @@ class moveOrBuildTest {
      */
     int numeroTest = 0;
 
-    @RepeatedTest(value = 10000)
+    @RepeatedTest(1000)
     public void test() throws Exception {
         double distanceMinimale;
         int indexBatiment;
@@ -59,6 +56,7 @@ class moveOrBuildTest {
         System.out.println("coord_y de la reine: " + reine.getCoord_y());
         System.out.println("**********************************");
         List<Batiment> batimentList = Main.generateBatiments(random.ints(1,1,10).iterator().nextInt());
+        reine.setBatimentList(batimentList);
         for (Batiment batiment : batimentList) {
             System.out.println(batiment.toString());
         }
@@ -96,7 +94,7 @@ class moveOrBuildTest {
         }
         System.out.println("Numéro du test: " + numeroTest);
         System.out.println("***********************");
-        reine.moveOrBuild(batimentList);
+        reine.moveOrBuild();
 
 
         // Vérifie si la bonne méthode a été appelée
@@ -105,13 +103,13 @@ class moveOrBuildTest {
             case 2:
             case 5:
             case 6:
-                Mockito.verify(reine).kinfOfMove(batimentList);
+                Mockito.verify(reine).kinfOfMove();
                 break;
             case 3:
             case 4:
             case 7:
             case 8:
-                Mockito.verify(reine).build(batimentList);
+                Mockito.verify(reine).build();
                 break;
         }
 

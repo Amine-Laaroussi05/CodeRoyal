@@ -19,13 +19,14 @@ public class UpdateBuildedRandomTest {
     @RepeatedTest(100)
     public void test(){
         List<Batiment> batimentList = Main.generateBatiments(10);
+        reine.setBatimentList(batimentList);
         for(Batiment batiment : batimentList){
             if(random.ints(1,0,2).iterator().nextInt() == 1) batiment.setRecentlyBuilded(true);
             if(random.ints(1,-1,2).iterator().nextInt() == 0) batiment.setOwner(0);
             System.out.println(batiment.toString());
         }
         System.out.println("***********");
-        reine.updateBuilded(batimentList);
+        reine.updateBuilded();
         for(Batiment batiment: batimentList){
             if(batiment.getOwner() == 0){
                 assertFalse(batiment.isRecentlyBuilded());

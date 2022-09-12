@@ -59,7 +59,8 @@ public class UpdateBuildedTest {
     @ParameterizedTest
     @CsvFileSource(resources = "/updateBuildedTest/expected.csv", numLinesToSkip = 1)
     public void test(boolean expected1, boolean expected2, boolean expected3){
-        reine.updateBuilded(batimentsHashMap.get(numeroTest));
+        reine.setBatimentList(batimentsHashMap.get(numeroTest));
+        reine.updateBuilded();
         assertEquals(expected1, batimentsHashMap.get(numeroTest).get(0).isRecentlyBuilded());
         assertEquals(expected2, batimentsHashMap.get(numeroTest).get(1).isRecentlyBuilded());
         assertEquals(expected3, batimentsHashMap.get(numeroTest++).get(2).isRecentlyBuilded());

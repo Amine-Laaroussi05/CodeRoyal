@@ -97,7 +97,7 @@ class KinfOfMoveTest {
         reine.setCoord_x(reineList.get(numeroTest-1).getCoord_x());
         reine.setCoord_y(reineList.get(numeroTest-1).getCoord_y());
         reine.setBatimentList(batimentsHashMap.get(numeroTest));
-        reine.kinfOfMove(batimentsHashMap.get(numeroTest));
+        reine.kinfOfMove();
         if(expectedMethod.equals("moveToAdverseBarrack")) Mockito.verify(reine).moveToAdverseBarrack();
         else Mockito.verify(reine).Move();
         numeroTest++;
@@ -113,7 +113,8 @@ class KinfOfMoveTest {
         reine.setCoord_y(random.ints(1,100,900).iterator().nextInt());
         System.out.println("Reine coord_y = " + reine.getCoord_y());
         List<Batiment> batimentList = new ArrayList<>();
-        reine.kinfOfMove(batimentList);
+        reine.setBatimentList(batimentList);
+        reine.kinfOfMove();
         Mockito.verify(reine).Move();
     }
 

@@ -1,7 +1,6 @@
 package CodeRoyal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Reine {
@@ -111,21 +110,20 @@ public class Reine {
 
     /**
      * Détermine si la méthode utilisée est build() ou kindOfMove().
-     * @param batimentList : la liste des bâtiments présents sur la carte.
      */
-    public void moveOrBuild(List<Batiment> batimentList) throws Exception {
+    public void moveOrBuild() throws Exception {
         if(batimentList.size() > 0){
             Batiment batiment = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
             double distance = Math.sqrt(Math.pow(coord_x - batiment.getCoord_x(),2) + Math.pow(coord_y - batiment.getCoord_y(),2));
             if(distance <= 30 & batiment.getOwner() != 0) {
-                build(batimentList);
+                build();
             }
             else{
-                kinfOfMove(batimentList);
+                kinfOfMove();
             }
         }
         else{
-            kinfOfMove(batimentList);
+            kinfOfMove();
         }
 
     }
@@ -141,9 +139,8 @@ public class Reine {
 
     /**
      * Permet à la reine de déterminer quel type de mouvement utilisé entre moveToAdverseBarrack() et move().
-     * @param batimentList : La liste des bâtiments présents sur la carte.
      */
-    public void kinfOfMove(List<Batiment> batimentList){
+    public void kinfOfMove(){
         int indexBatimentPlusProche = Main.calculateMinimalDistance(coord_x,coord_y,batimentList);
         if( indexBatimentPlusProche == -1){
             Move();
@@ -163,7 +160,7 @@ public class Reine {
      * Construction d'un bâtiment.
      * La méthode affiche le BUILD selon s'il n'y a pas de bâtiment allié de construit sur le site.
      */
-    public void build(List<Batiment> batimentList) throws Exception {
+    public void build() throws Exception {
         Batiment batimentPlusProche = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
 
         System.out.println("BUILD " + batimentPlusProche.getId() + " " + barracks(batimentPlusProche));
@@ -179,9 +176,8 @@ public class Reine {
      * Le besoin d'une telle méthode réside dans le fait de prendre en compte l'état d'un bâtiment
      * (récemment builded ou non) pour éviter de `Build` le bâtiment et `Train` une armée du bâtiment
      * dans le même tour du jeu.
-     * @param batimentList : une liste de bâtiments
      */
-    public void updateBuilded(List<Batiment> batimentList){
+    public void updateBuilded(){
         for(Batiment batiment: batimentList) if(batiment.getOwner() == 0) batiment.setRecentlyBuilded(false);
     }
 
@@ -205,7 +201,7 @@ public class Reine {
      * Un attribut compteur_K permettra de tenir compte des entraînements type KNIGHT.
      *
      */
-    public String train(List<Batiment> batimentList) throws Exception {
+    public String train() throws Exception {
         // Une liste de bâtiments qui ne contient que les bâtiments avec un owner = 0 (bâtiments alliés)
         List<Batiment> batimentListOwned = new ArrayList<>();
         for(Batiment batiment: batimentList){
@@ -216,7 +212,7 @@ public class Reine {
         batimentListOwned.sort((batiment1, batiment2) -> (int) Main.compareDistanceEntreDeuxBatimentsAvecLaReine(batiment1,batiment2, coord_x,coord_y));
 
         // On lance le cycle d'entrainements des armées
-        armyTrain(batimentListOwned);
+        armyTrain();
 
         // Si on n'a pas assez d'or, on ne fait aucun entrainement
         if(gold < 80) return "TRAIN";
@@ -248,12 +244,11 @@ public class Reine {
 
     /**
      * Poursuit le cycle d'entrainement des armées qui sont en train d'être entrainées.
-     * @param batimentList : Une liste de bâtiments
      */
-    public void armyTrain(List<Batiment> batimentList){
+    public void armyTrain(){
         for(Batiment batiment: batimentList){
-            if(batiment.getArmyTrained() > 0 & batiment.getArmyTrained() < 10) batiment.setArmyTrained(batiment.getArmyTrained() +1);
-            else if(batiment.getArmyTrained() == 10) batiment.setArmyTrained(0);
+            if(batiment.getArmyTrained() > 0 & batiment.getArmyTrained() < 10 & batiment.getOwner() == 0) batiment.setArmyTrained(batiment.getArmyTrained() +1);
+            else if(batiment.getArmyTrained() == 10 & batiment.getOwner() == 0) batiment.setArmyTrained(0);
         }
     }
 

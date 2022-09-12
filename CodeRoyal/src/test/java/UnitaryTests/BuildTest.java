@@ -76,6 +76,7 @@ public class BuildTest {
 
         // On génère une liste de bâtiments aléatoire
         List<Batiment> batimentList = Main.generateBatiments(random.ints(1,0,10).iterator().nextInt());
+        reine.setBatimentList(batimentList);
 
         // On assigne des coordonnées aléatoires à la reine
         reine.setCoord_x(random.ints(1,100,1920).iterator().nextInt());
@@ -110,7 +111,7 @@ public class BuildTest {
 
         // On enregistre le résultat de la méthode build() dans un attribut de type String
         String texte = tapSystemOut(()->{
-            reine.build(batimentList);
+            reine.build();
         });
 
         String expectedTexte = "BUILD " + batimentListNotOwner.get(0).getId() + " " + "BARRACKS-ARCHER" + System.lineSeparator();

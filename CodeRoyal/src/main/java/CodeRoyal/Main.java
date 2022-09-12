@@ -151,9 +151,9 @@ public class Main {
             System.out.println("Batiment coord_x = " + calculateminimalDistanceForAllBatiments(reine.getCoord_x(),reine.getCoord_y(),batimentList).getCoord_x());
             System.out.println("Batiment coord_y = " + calculateminimalDistanceForAllBatiments(reine.getCoord_x(),reine.getCoord_y(),batimentList).getCoord_y());
             reine.setGold(reine.getGold() + 10);
-            reine.updateBuilded(batimentList);
-            reine.moveOrBuild(batimentList);
-            System.out.println(reine.train(batimentList));
+            reine.updateBuilded();
+            reine.moveOrBuild();
+            System.out.println(reine.train());
         }
     }
 
