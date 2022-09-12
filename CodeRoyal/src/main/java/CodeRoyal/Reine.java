@@ -19,8 +19,6 @@ public class Reine {
 
     private int coord_y = 0;
 
-    private List<List<Integer>> touchedSite = new ArrayList<>();
-
     private int gold = 100;
 
     private HashMap<Integer, List<String>> sitesID = new HashMap<>();
@@ -80,45 +78,7 @@ public class Reine {
 
 
 
-    /**
-     * Déplacement de la reine
-     */
-    public void Move(List<Batiment> batimentList){
 
-
-//            Vérifie si on est dans le bon carré de taille 1920x1000
-        if(this.coord_x + 60 > 1920 && this.direction_horizontale){
-            this.direction_horizontale = false;
-            this.choix_direction = false;
-        } else if(this.coord_x - 60 < 0 && !this.direction_horizontale){
-            this.direction_horizontale = true;
-            this.choix_direction = false;
-        }
-        if(this.coord_y + 60 > 1000 && this.direction_verticale){
-            this.direction_verticale = false;
-        } else if(this.coord_y - 60 < 0 && !this.direction_verticale){
-            this.direction_verticale = true;
-        }
-
-//          La reine se déplace horizontalement jusqu'à arriver au bord, puis descend ou monte de 60 et se déplace à nouveau horizontalement dans l'autre sens
-        if(this.choix_direction){
-            if(this.direction_horizontale){
-                this.coord_x += 60;
-            } else{
-                this.coord_x -= 60;
-            }
-        } else{
-            if(this.direction_verticale){
-                this.coord_y += 60;
-            } else{
-                this.coord_y -= 60;
-            }
-            this.choix_direction = true;
-        }
-
-
-        System.out.println("MOVE " + coord_x + " " + coord_y);
-    }
 
 
 
@@ -145,8 +105,6 @@ public class Reine {
             System.out.println("MOVE " + batimentList.get(indexBatiment).getCoord_x() + " " + batimentList.get(indexBatiment).getCoord_y());
         }
     }
-
-
 
 
 
@@ -203,144 +161,16 @@ public class Reine {
 
 
 
-
-
-
-
-
-    /**
-     * Permet d'initialiser touchedSite selon les futurs déplacements de la reine.
-     */
-    public void touchedSiteInitializer(){
-
-        for(int index = 0; index <= 560; index++){
-            List<Integer> integerList = new ArrayList<>();
-            integerList.add(-1);
-            integerList.add(this.coord_x);
-            integerList.add(this.coord_y);
-            this.touchedSite.add(integerList);
-            this.Move();
-        }
-
-        this.coord_x = 0;
-        this.coord_y = 0;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Vérifie si un bâtiment a été construit sur le site ou non.
-     * @return -1 ou 0 selon si oui ou non il y a eu un site construit.
-     */
-    public int ownerSite(){
-        int indice = 0;
-        for(int index = 0; index <= 560; index++){
-            if(this.touchedSite.get(index).get(1) == this.coord_x && this.touchedSite.get(index).get(2) == this.coord_y){
-                indice =  this.touchedSite.get(index).get(0);
-                break;
-            }
-        }
-        return indice;
-    }
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Détermine l'indice dans touchedSite où se trouve coord_x et coord_y.
-     */
-    public int indexTouchedSite(){
-        int indice = 0;
-        for(int index = 0; index <= 560; index++){
-            if(this.touchedSite.get(index).get(1) == this.coord_x && this.touchedSite.get(index).get(2) == this.coord_y){
-                indice = index;
-                break;
-            }
-        }
-        return indice;
-    }
-
-
-
-
-
-
-    /**
-     * Cette méthode permet de changer les valeurs de siteID qui sont à -1 en des valeurs 0.
-     * Le besoin d'une telle méthode réside dans le fait d'éviter de TRAIN l'armée dans le même tour que le bâtiment a été BUILD.
-    * On affectera la valeur -1 au siteID du bâtiment quand celui-ci a été construit dans le tour présent.
-    * Au tour suivant, la valeur sera à 0 pour signifier que l'armée de ce bâtiment est prête à être TRAIN.
-    * Quand l'armée est TRAIN, la valeur sera à 1.
-     *
-    */
-    public void updateSiteID(){
-
-        for(int key: sitesID.keySet()){
-            if(sitesID.get(key).get(1).equalsIgnoreCase("-1")){
-                List<String> siteIdentifier = new ArrayList<>();
-                siteIdentifier.add("K");
-                siteIdentifier.add("0");
-                sitesID.replace(key,siteIdentifier);
-            }
-        }
-    }
-
-
-
-
-
-
-
-
     /**
      * Construction d'un bâtiment.
      * La méthode affiche le BUILD selon s'il n'y a pas de bâtiment allié de construit sur le site.
      */
     public void build(List<Batiment> batimentList) throws Exception {
-
-//        List<Integer> coordonees = new ArrayList<>();
-//        coordonees.add(0);
-//        coordonees.add(this.coord_x);
-//        coordonees.add(this.coord_y);
-
-
-
-//        if(ownerSite() != 0){
-//            this.setTouchedSiteArray(indexTouchedSite(), coordonees);
-//            List<String> siteIdentifier = new ArrayList<>();
-//            siteIdentifier.add("K");
-//            siteIdentifier.add("-1");
-//            sitesID.put(indexTouchedSite(),siteIdentifier);
-////            System.out.println("Hashmap: " + sitesID);
-//            System.out.print("BUILD " + indexTouchedSite() + " " + barracks());
-//        }
-
         Batiment batimentPlusProche = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
-
-
 
         System.out.println("BUILD " + batimentPlusProche.getId() + " " + barracks(batimentPlusProche));
         batimentPlusProche.setRecentlyBuilded(true);
         batimentPlusProche.setOwner(0);
-
-
-
     }
 
 
@@ -528,18 +358,6 @@ public class Reine {
 
     public void setCoord_y(int coord_y) {
         this.coord_y = coord_y;
-    }
-
-    public List<List<Integer>> getTouchedSite() {
-        return touchedSite;
-    }
-
-    public void setTouchedSite(List<List<Integer>> touchedSite) {
-        this.touchedSite = touchedSite;
-    }
-
-    public void setTouchedSiteArray(int index, List<Integer> ElementOfTouchedSite){
-        this.touchedSite.set(index, ElementOfTouchedSite);
     }
 
     public int getGold() {

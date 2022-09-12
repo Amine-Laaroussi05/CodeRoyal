@@ -107,7 +107,7 @@ public class Batiment {
         sb.append(", coord_y=").append(coord_y);
         sb.append(", owner=").append(owner);
         sb.append(", armyTrained=").append(armyTrained);
-        sb.append(", builded=").append(recentlyBuilded);
+        sb.append(", recentlyBuilded=").append(recentlyBuilded);
         sb.append('}');
         return sb.toString();
     }
