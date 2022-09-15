@@ -143,6 +143,7 @@ public class Main {
 
         List<Batiment> batimentList = generateBatiments(10);
         Reine reine = new Reine();
+        reine.setBatimentList(batimentList);
         for(int index = 1; index < 1300; index++){
             System.out.println("Tour : " + index);
             System.out.println("Reine coord_x = " + reine.getCoord_x());
@@ -150,36 +151,10 @@ public class Main {
             System.out.println("Batiment coord_x = " + calculateminimalDistanceForAllBatiments(reine.getCoord_x(),reine.getCoord_y(),batimentList).getCoord_x());
             System.out.println("Batiment coord_y = " + calculateminimalDistanceForAllBatiments(reine.getCoord_x(),reine.getCoord_y(),batimentList).getCoord_y());
             reine.setGold(reine.getGold() + 10);
-            reine.updateBuilded(batimentList);
-            reine.moveOrBuild(batimentList);
-            System.out.println(reine.train(batimentList));
+            reine.updateBuilded();
+            reine.moveOrBuild();
+            System.out.println(reine.train());
         }
-
-
-
-//        Reine reine = new Reine();
-//        reine.touchedSiteInitializer();
-//        boolean haveMoved = false;
-
-
-//        for(int index = 1; index < 1300; index++){
-//            System.out.println("Tour : " + index);
-//            reine.updateSiteID();
-//            if(!haveMoved || reine.ownerSite() == 0){
-//            reine.Move();
-//            System.out.println("MOVE " + reine.getCoord_x() + " " + reine.getCoord_y());
-//            haveMoved = true;
-//            } else{
-////                reine.build();
-//                System.out.println("");
-//                haveMoved = false;
-//            }
-//            reine.setGold(reine.getGold()+ 10);
-//            System.out.println("gold: " + reine.getGold());
-//            System.out.println(reine.train());
-//            System.out.println("==================");
-//        }
-
     }
 
 

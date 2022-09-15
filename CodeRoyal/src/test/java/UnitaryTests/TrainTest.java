@@ -33,6 +33,7 @@ class TrainTest {
         Random random = new Random();
         List<Batiment> batimentList = Main.generateBatiments(random.ints(1,0,10).iterator().nextInt());
         Reine reine = new Reine();
+        reine.setBatimentList(batimentList);
         int id = -1;
         char armyType = 'O';
         int numeroTest =0;
@@ -99,11 +100,11 @@ class TrainTest {
             case 1:
             case 2:
             case 4:
-                assertEquals("TRAIN",reine.train(batimentList));
+                assertEquals("TRAIN",reine.train());
                 break;
             case 3:
             case 5:
-                    assertEquals("TRAIN " + id, reine.train(batimentList));
+                    assertEquals("TRAIN " + id, reine.train());
         }
 
     }

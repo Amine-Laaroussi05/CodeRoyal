@@ -25,11 +25,12 @@ class ArmyTrainTest {
 
     @BeforeAll
     public static void setUp(){
+        reine.setBatimentList(batimentList);
         for(Batiment batiment: batimentList){
             armyTrainedList.add(random.ints(1,0,10).iterator().nextInt());
             batiment.setArmyTrained(armyTrainedList.get(batimentList.indexOf(batiment)));
         }
-        reine.armyTrain(batimentList);
+        reine.armyTrain();
     }
 
     @BeforeEach
@@ -40,8 +41,8 @@ class ArmyTrainTest {
 
     @RepeatedTest(20)
     public void test(){
-        if(batiment.getArmyTrained() > 0 & batiment.getArmyTrained() <= 10) assertEquals(armyTrainedList.get(batimentList.indexOf(batiment))+1, batiment.getArmyTrained());
-        else if(armyTrainedList.get(batimentList.indexOf(batiment)) == 10) assertEquals(0,batiment.getArmyTrained());
+        if(batiment.getArmyTrained() > 0 & batiment.getArmyTrained() <= 10 & batiment.getOwner() == 0) assertEquals(armyTrainedList.get(batimentList.indexOf(batiment))+1, batiment.getArmyTrained());
+        else if(armyTrainedList.get(batimentList.indexOf(batiment)) == 10 & batiment.getOwner() == 0) assertEquals(0,batiment.getArmyTrained());
     }
 
 }

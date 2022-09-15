@@ -1,7 +1,6 @@
 package CodeRoyal;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class Reine {
@@ -19,13 +18,10 @@ public class Reine {
 
     private int coord_y = 0;
 
-    private List<List<Integer>> touchedSite = new ArrayList<>();
-
     private int gold = 100;
 
-    private HashMap<Integer, List<String>> sitesID = new HashMap<>();
-
     private int compteurKnight = 0;
+    private List<Batiment> batimentList;
 
 
 
@@ -80,45 +76,7 @@ public class Reine {
 
 
 
-    /**
-     * Déplacement de la reine
-     */
-    public void Move(List<Batiment> batimentList){
 
-
-//            Vérifie si on est dans le bon carré de taille 1920x1000
-        if(this.coord_x + 60 > 1920 && this.direction_horizontale){
-            this.direction_horizontale = false;
-            this.choix_direction = false;
-        } else if(this.coord_x - 60 < 0 && !this.direction_horizontale){
-            this.direction_horizontale = true;
-            this.choix_direction = false;
-        }
-        if(this.coord_y + 60 > 1000 && this.direction_verticale){
-            this.direction_verticale = false;
-        } else if(this.coord_y - 60 < 0 && !this.direction_verticale){
-            this.direction_verticale = true;
-        }
-
-//          La reine se déplace horizontalement jusqu'à arriver au bord, puis descend ou monte de 60 et se déplace à nouveau horizontalement dans l'autre sens
-        if(this.choix_direction){
-            if(this.direction_horizontale){
-                this.coord_x += 60;
-            } else{
-                this.coord_x -= 60;
-            }
-        } else{
-            if(this.direction_verticale){
-                this.coord_y += 60;
-            } else{
-                this.coord_y -= 60;
-            }
-            this.choix_direction = true;
-        }
-
-
-        System.out.println("MOVE " + coord_x + " " + coord_y);
-    }
 
 
 
@@ -127,9 +85,8 @@ public class Reine {
 
     /**
      * Pour déplacer la reine vers le bâtiment adverse le plus proche.
-     * @param batimentList : La liste des bâtiments présents sur la carte.
      */
-    public void moveToAdverseBarrack(List<Batiment> batimentList){
+    public void moveToAdverseBarrack(){
         int indexBatiment = Main.calculateMinimalDistance(coord_x,coord_y,batimentList); // Indice du bâtiment ennemi le plus proche de la reine (-1 s'il n'y a aucun bâtiment ennemi)
         if(indexBatiment != -1){
             if(batimentList.get(indexBatiment).getCoord_y() > coord_y + 60) coord_y += 60;
@@ -151,25 +108,22 @@ public class Reine {
 
 
 
-
-
     /**
      * Détermine si la méthode utilisée est build() ou kindOfMove().
-     * @param batimentList : la liste des bâtiments présents sur la carte.
      */
-    public void moveOrBuild(List<Batiment> batimentList) throws Exception {
+    public void moveOrBuild() throws Exception {
         if(batimentList.size() > 0){
             Batiment batiment = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
             double distance = Math.sqrt(Math.pow(coord_x - batiment.getCoord_x(),2) + Math.pow(coord_y - batiment.getCoord_y(),2));
             if(distance <= 30 & batiment.getOwner() != 0) {
-                build(batimentList);
+                build();
             }
             else{
-                kinfOfMove(batimentList);
+                kinfOfMove();
             }
         }
         else{
-            kinfOfMove(batimentList);
+            kinfOfMove();
         }
 
     }
@@ -185,9 +139,8 @@ public class Reine {
 
     /**
      * Permet à la reine de déterminer quel type de mouvement utilisé entre moveToAdverseBarrack() et move().
-     * @param batimentList : La liste des bâtiments présents sur la carte.
      */
-    public void kinfOfMove(List<Batiment> batimentList){
+    public void kinfOfMove(){
         int indexBatimentPlusProche = Main.calculateMinimalDistance(coord_x,coord_y,batimentList);
         if( indexBatimentPlusProche == -1){
             Move();
@@ -195,114 +148,9 @@ public class Reine {
             double distanceReineBatimentPlusProche = Math.sqrt(Math.pow(batimentList.get(indexBatimentPlusProche).getCoord_x() - coord_x, 2)
                     + Math.pow(batimentList.get(indexBatimentPlusProche).getCoord_y() - coord_y, 2));
             if(distanceReineBatimentPlusProche < 30) Move();
-            else moveToAdverseBarrack(batimentList);
+            else moveToAdverseBarrack();
         }
     }
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Permet d'initialiser touchedSite selon les futurs déplacements de la reine.
-     */
-    public void touchedSiteInitializer(){
-
-        for(int index = 0; index <= 560; index++){
-            List<Integer> integerList = new ArrayList<>();
-            integerList.add(-1);
-            integerList.add(this.coord_x);
-            integerList.add(this.coord_y);
-            this.touchedSite.add(integerList);
-            this.Move();
-        }
-
-        this.coord_x = 0;
-        this.coord_y = 0;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Vérifie si un bâtiment a été construit sur le site ou non.
-     * @return -1 ou 0 selon si oui ou non il y a eu un site construit.
-     */
-    public int ownerSite(){
-        int indice = 0;
-        for(int index = 0; index <= 560; index++){
-            if(this.touchedSite.get(index).get(1) == this.coord_x && this.touchedSite.get(index).get(2) == this.coord_y){
-                indice =  this.touchedSite.get(index).get(0);
-                break;
-            }
-        }
-        return indice;
-    }
-
-
-
-
-
-
-
-
-
-
-
-    /**
-     * Détermine l'indice dans touchedSite où se trouve coord_x et coord_y.
-     */
-    public int indexTouchedSite(){
-        int indice = 0;
-        for(int index = 0; index <= 560; index++){
-            if(this.touchedSite.get(index).get(1) == this.coord_x && this.touchedSite.get(index).get(2) == this.coord_y){
-                indice = index;
-                break;
-            }
-        }
-        return indice;
-    }
-
-
-
-
-
-
-    /**
-     * Cette méthode permet de changer les valeurs de siteID qui sont à -1 en des valeurs 0.
-     * Le besoin d'une telle méthode réside dans le fait d'éviter de TRAIN l'armée dans le même tour que le bâtiment a été BUILD.
-    * On affectera la valeur -1 au siteID du bâtiment quand celui-ci a été construit dans le tour présent.
-    * Au tour suivant, la valeur sera à 0 pour signifier que l'armée de ce bâtiment est prête à être TRAIN.
-    * Quand l'armée est TRAIN, la valeur sera à 1.
-     *
-    */
-    public void updateSiteID(){
-
-        for(int key: sitesID.keySet()){
-            if(sitesID.get(key).get(1).equalsIgnoreCase("-1")){
-                List<String> siteIdentifier = new ArrayList<>();
-                siteIdentifier.add("K");
-                siteIdentifier.add("0");
-                sitesID.replace(key,siteIdentifier);
-            }
-        }
-    }
-
-
-
 
 
 
@@ -312,35 +160,12 @@ public class Reine {
      * Construction d'un bâtiment.
      * La méthode affiche le BUILD selon s'il n'y a pas de bâtiment allié de construit sur le site.
      */
-    public void build(List<Batiment> batimentList) throws Exception {
-
-//        List<Integer> coordonees = new ArrayList<>();
-//        coordonees.add(0);
-//        coordonees.add(this.coord_x);
-//        coordonees.add(this.coord_y);
-
-
-
-//        if(ownerSite() != 0){
-//            this.setTouchedSiteArray(indexTouchedSite(), coordonees);
-//            List<String> siteIdentifier = new ArrayList<>();
-//            siteIdentifier.add("K");
-//            siteIdentifier.add("-1");
-//            sitesID.put(indexTouchedSite(),siteIdentifier);
-////            System.out.println("Hashmap: " + sitesID);
-//            System.out.print("BUILD " + indexTouchedSite() + " " + barracks());
-//        }
-
+    public void build() throws Exception {
         Batiment batimentPlusProche = Main.calculateminimalDistanceForAllBatiments(coord_x,coord_y,batimentList);
-
-
 
         System.out.println("BUILD " + batimentPlusProche.getId() + " " + barracks(batimentPlusProche));
         batimentPlusProche.setRecentlyBuilded(true);
         batimentPlusProche.setOwner(0);
-
-
-
     }
 
 
@@ -351,9 +176,8 @@ public class Reine {
      * Le besoin d'une telle méthode réside dans le fait de prendre en compte l'état d'un bâtiment
      * (récemment builded ou non) pour éviter de `Build` le bâtiment et `Train` une armée du bâtiment
      * dans le même tour du jeu.
-     * @param batimentList : une liste de bâtiments
      */
-    public void updateBuilded(List<Batiment> batimentList){
+    public void updateBuilded(){
         for(Batiment batiment: batimentList) if(batiment.getOwner() == 0) batiment.setRecentlyBuilded(false);
     }
 
@@ -377,7 +201,7 @@ public class Reine {
      * Un attribut compteur_K permettra de tenir compte des entraînements type KNIGHT.
      *
      */
-    public String train(List<Batiment> batimentList) throws Exception {
+    public String train() throws Exception {
         // Une liste de bâtiments qui ne contient que les bâtiments avec un owner = 0 (bâtiments alliés)
         List<Batiment> batimentListOwned = new ArrayList<>();
         for(Batiment batiment: batimentList){
@@ -388,7 +212,7 @@ public class Reine {
         batimentListOwned.sort((batiment1, batiment2) -> (int) Main.compareDistanceEntreDeuxBatimentsAvecLaReine(batiment1,batiment2, coord_x,coord_y));
 
         // On lance le cycle d'entrainements des armées
-        armyTrain(batimentListOwned);
+        armyTrain();
 
         // Si on n'a pas assez d'or, on ne fait aucun entrainement
         if(gold < 80) return "TRAIN";
@@ -420,12 +244,11 @@ public class Reine {
 
     /**
      * Poursuit le cycle d'entrainement des armées qui sont en train d'être entrainées.
-     * @param batimentList : Une liste de bâtiments
      */
-    public void armyTrain(List<Batiment> batimentList){
+    public void armyTrain(){
         for(Batiment batiment: batimentList){
-            if(batiment.getArmyTrained() > 0 & batiment.getArmyTrained() < 10) batiment.setArmyTrained(batiment.getArmyTrained() +1);
-            else if(batiment.getArmyTrained() == 10) batiment.setArmyTrained(0);
+            if(batiment.getArmyTrained() > 0 & batiment.getArmyTrained() < 10 & batiment.getOwner() == 0) batiment.setArmyTrained(batiment.getArmyTrained() +1);
+            else if(batiment.getArmyTrained() == 10 & batiment.getOwner() == 0) batiment.setArmyTrained(0);
         }
     }
 
@@ -530,18 +353,6 @@ public class Reine {
         this.coord_y = coord_y;
     }
 
-    public List<List<Integer>> getTouchedSite() {
-        return touchedSite;
-    }
-
-    public void setTouchedSite(List<List<Integer>> touchedSite) {
-        this.touchedSite = touchedSite;
-    }
-
-    public void setTouchedSiteArray(int index, List<Integer> ElementOfTouchedSite){
-        this.touchedSite.set(index, ElementOfTouchedSite);
-    }
-
     public int getGold() {
         return gold;
     }
@@ -550,20 +361,19 @@ public class Reine {
         this.gold = gold;
     }
 
-    public HashMap<Integer, List<String>> getSitesID() {
-        return sitesID;
-    }
-
-    public void setSitesID(HashMap<Integer, List<String>> sitesID) {
-        this.sitesID = sitesID;
-    }
-
-
     public int getCompteurKnight() {
         return compteurKnight;
     }
 
     public void setCompteurKnight(int compteurKnight) {
         this.compteurKnight = compteurKnight;
+    }
+
+    public List<Batiment> getBatimentList() {
+        return batimentList;
+    }
+
+    public void setBatimentList(List<Batiment> batimentList) {
+        this.batimentList = batimentList;
     }
 }
